@@ -1,0 +1,21 @@
+﻿using System;
+using System.Collections.Generic;
+
+namespace BusinessObjects.Models;
+
+public partial class ActivityLog
+{
+    public int LogId { get; set; }
+
+    public int UserId { get; set; }
+
+    public string Action { get; set; } = null!;
+
+    public string? ActionDetails { get; set; }
+
+    public string? Ipaddress { get; set; }
+
+    public DateTime LoggedAt { get; set; }
+
+    public virtual User User { get; set; } = null!;
+}
