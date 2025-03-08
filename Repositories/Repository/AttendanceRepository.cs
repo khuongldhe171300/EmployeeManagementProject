@@ -11,10 +11,10 @@ namespace Repositories.Repository
 {
     public class AttendanceRepository : IAttendanceRepository
     {
-        private readonly HrmanagementContext _context;
-        public AttendanceRepository(HrmanagementContext context)
+        private readonly AttendanceDAO attendanceDAO;
+        public AttendanceRepository(AttendanceDAO _attendanceDAO)
         {
-            _context = context;
+            attendanceDAO = _attendanceDAO;
         }
         public Task Add(Attendance entity)
         {
@@ -27,6 +27,11 @@ namespace Repositories.Repository
         }
 
         public Task<IEnumerable<Attendance>> GetAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Attendance? GetAttendanceByEmployeeId(int id)
         {
             throw new NotImplementedException();
         }
