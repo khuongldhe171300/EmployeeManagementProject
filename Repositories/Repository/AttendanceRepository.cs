@@ -12,10 +12,12 @@ namespace Repositories.Repository
     public class AttendanceRepository : IAttendanceRepository
     {
         private readonly AttendanceDAO attendanceDAO;
+
         public AttendanceRepository(AttendanceDAO _attendanceDAO)
         {
             attendanceDAO = _attendanceDAO;
         }
+        
         public Task Add(Attendance entity)
         {
             throw new NotImplementedException();
@@ -45,5 +47,7 @@ namespace Repositories.Repository
         {
             throw new NotImplementedException();
         }
+
+        List<Attendance> IAttendanceRepository.GetAttendanceByEmployeeId(int id) => attendanceDAO.GetAttendanceByEmployeeId(id);
     }
 }
