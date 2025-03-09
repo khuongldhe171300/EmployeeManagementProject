@@ -10,5 +10,7 @@ namespace Repositories.Interface
     public interface IAttendanceRepository : IRepository<Attendance>
     {
         List<Attendance> GetAttendanceByEmployeeId(int id);
+        void UpdateAttendance(Attendance attendance);
+        void AddAttendance(Attendance attendance);
     }
 }

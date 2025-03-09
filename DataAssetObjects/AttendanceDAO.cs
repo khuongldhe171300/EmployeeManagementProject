@@ -1,4 +1,5 @@
 ﻿using BusinessObjects.Models;
+using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace DataAssetObjects
     {
         private readonly HrmanagementContext _context;
 
-        public AttendanceDAO (HrmanagementContext context)
+        public AttendanceDAO(HrmanagementContext context)
         {
             _context = context;
         }
@@ -29,5 +30,34 @@ namespace DataAssetObjects
                 return new List<Attendance>(); // Trả về danh sách rỗng thay vì null để tránh lỗi NullReferenceException
             }
         }
+
+        public void AddAttendance(Attendance attendance)
+        {
+            try
+            {
+                _context.Attendances.Add(attendance);
+                _context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                // Ghi log lỗi (tuỳ vào hệ thống logging của bạn)
+                Console.WriteLine($"Lỗi khi lấy dữ liệu chấm công: {ex.Message}");
+            }
+        }
+
+        public void UpdateAttendance(Attendance attendance)
+        {
+            try
+            {
+                _context.Attendances.Update(attendance);
+                _context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                // Ghi log lỗi (tuỳ vào hệ thống logging của bạn)
+                Console.WriteLine($"Lỗi khi lấy dữ liệu chấm công: {ex.Message}");
+            }
+        }
+
     }
 }

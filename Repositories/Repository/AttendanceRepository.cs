@@ -23,6 +23,8 @@ namespace Repositories.Repository
             throw new NotImplementedException();
         }
 
+        public void AddAttendance(Attendance attendance) => attendanceDAO.AddAttendance(attendance);
+
         public Task Delete(int id)
         {
             throw new NotImplementedException();
@@ -47,6 +49,8 @@ namespace Repositories.Repository
         {
             throw new NotImplementedException();
         }
+
+        public void UpdateAttendance(Attendance attendance) => attendanceDAO.UpdateAttendance(attendance);
 
         List<Attendance> IAttendanceRepository.GetAttendanceByEmployeeId(int id) => attendanceDAO.GetAttendanceByEmployeeId(id);
     }

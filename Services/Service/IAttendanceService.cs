@@ -10,5 +10,7 @@ namespace Services.Service
     public interface IAttendanceService
     {
         List<Attendance> GetAttendanceByEmployeeId(int id);
+        void UpdateAttendance(Attendance attendance);
+        void AddAttendance(Attendance attendance);
     }
 }

@@ -1,0 +1,73 @@
+﻿<Window x:Class="WPF.ChamCong"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPF"
+        WindowStartupLocation="CenterScreen"
+        mc:Ignorable="d"
+    Title="ChamCong" Height="550" Width="800" Background="#f2f2f2">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Tiêu đề -->
+        <TextBlock Text="Chấm Công"
+               FontSize="24" FontWeight="Bold" Foreground="#333"
+               HorizontalAlignment="Center" Margin="0,10,0,20"/>
+
+        <!-- DataGrid hiển thị danh sách chấm công -->
+        <DataGrid
+            Name="AttendancesList"
+              AutoGenerateColumns="False"
+              Grid.Row="1"
+              Margin="0,0,0,10"
+              RowBackground="White"
+              AlternatingRowBackground="#E3E3E3"
+              BorderThickness="1" BorderBrush="Gray" SelectionChanged="DataGrid_SelectionChanged">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Ngày" Width="150">
+                    <DataGridTextColumn.Binding>
+                        <Binding Path="WorkDate" StringFormat="{}{0:dd/MM/yyyy}" />
+                    </DataGridTextColumn.Binding>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Giờ vào" Width="150">
+                    <DataGridTextColumn.Binding>
+                        <Binding Path="CheckInTime" StringFormat="{}{0:HH:mm}" />
+                    </DataGridTextColumn.Binding>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Giờ ra" Width="150">
+                    <DataGridTextColumn.Binding>
+                        <Binding Path="CheckOutTime" StringFormat="{}{0:HH:mm}" />
+                    </DataGridTextColumn.Binding>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Trạng thái" Binding="{Binding WorkStatus}" Width="150"/>
+                <DataGridTextColumn Header="Giờ làm" Binding="{Binding WorkHours}" Width="100"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <!-- Các nút điều khiển -->
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Content="Quay lại" Width="120" Height="40" Margin="0,0,10,0"
+Background="#DC3545" Foreground="White" FontWeight="Bold"
+Click="Back_Click"/>
+
+            <Button Content="Chấm Công Vào" Width="120" Height="40" Margin="0,0,10,0"
+        Background="#28A745" Foreground="White" FontWeight="Bold"
+         Click="CheckIn_Click"/>
+
+            <Button Content="Chấm Công Ra" Width="120" Height="40" Margin="0,0,10,0"
+        Background="#FFA500" Foreground="White" FontWeight="Bold"
+         Click="CheckOut_Click"/>
+
+            <Button Content="Làm Mới" Width="120" Height="40" Margin="0,0,10,0"
+        Background="#007BFF" Foreground="White" FontWeight="Bold"
+        Click="Refresh_Click"/>
+
+        </StackPanel>
+
+    </Grid>
+</Window>
