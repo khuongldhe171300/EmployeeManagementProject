@@ -5,10 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Repositories.Interface
+namespace Services
 {
-    public interface IAttendanceRepository : IRepository<Attendance>
+    public interface IAttendanceService
     {
-        List<Attendance> GetAttendanceByEmployeeId(int id);
+        Attendance? GetAttendanceByEmployeeId(int id);
     }
 }
