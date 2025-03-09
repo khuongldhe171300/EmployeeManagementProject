@@ -9,6 +9,6 @@ namespace Services
 {
     public interface IAttendanceService
     {
-        Attendance? GetAttendanceByEmployeeId(int id);
+        List<Attendance> GetAttendanceByEmployeeId(int id);
     }
 }

@@ -13,7 +13,7 @@ namespace WPF
 {
     public partial class LichSuChamCong : Window, INotifyPropertyChanged
     {
-        private readonly AttendanceService _attendanceService;
+        private readonly IAttendanceService _attendanceService;
         private ObservableCollection<Attendance> _attendanceList;
 
         public ObservableCollection<Attendance> AttendanceList

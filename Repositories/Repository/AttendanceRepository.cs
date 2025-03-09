@@ -12,6 +12,11 @@ namespace Repositories.Repository
     public class AttendanceRepository : IAttendanceRepository
     {
         private readonly AttendanceDAO attendanceDAO;
+
+        public AttendanceRepository(AttendanceDAO _attendanceDAO)
+        {
+            attendanceDAO = _attendanceDAO;
+        }
         
         public Task Add(Attendance entity)
         {

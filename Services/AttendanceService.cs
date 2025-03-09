@@ -1,5 +1,7 @@
 ﻿using BusinessObjects.Models;
+using DataAssetObjects;
 using Repositories.Interface;
+using Repositories.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,11 +14,11 @@ namespace Services
     {
         private readonly IAttendanceRepository _attendanceRepo;
 
-        public AttendanceService (IAttendanceRepository attendanceRepo)
+        public AttendanceService(AttendanceRepository attendanceRepo)
         {
             _attendanceRepo = attendanceRepo;
-        }   
+        }
 
-        public Attendance? GetAttendanceByEmployeeId(int id) => _attendanceRepo.GetAttendanceByEmployeeId(id);
+        List<Attendance> IAttendanceService.GetAttendanceByEmployeeId(int id) => _attendanceRepo.GetAttendanceByEmployeeId(id);
     }
 }
