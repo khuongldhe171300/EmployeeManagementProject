@@ -9,5 +9,6 @@ namespace Repositories.Interface
 {
     public interface IAttendanceRepository : IRepository<Attendance>
     {
+        Attendance? GetAttendanceByEmployeeId(int id);
     }
 }
