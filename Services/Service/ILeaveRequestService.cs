@@ -1,14 +1,13 @@
-﻿using BusinessObjects.Models;
-using DataAssetObjects;
+﻿using DataAssetObjects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Repositories.Interface
+namespace Services.Service
 {
-    public interface ILeaveRequestRepository : IRepository<LeaveRequest>
+    public interface ILeaveRequestService
     {
         List<LeaveSummary> GetLeaveSummary(int employeeId, int month, int year);
     }
