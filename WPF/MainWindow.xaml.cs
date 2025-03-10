@@ -42,7 +42,7 @@ namespace WPF
                         case "User":
                             break;
                         default:
-                            MessageBox.Show("Tài khoản không có quyền");
+                            MessageBox.Show("Tài khoản chưa được cấp quyền");
                             break;
                     }
                 }

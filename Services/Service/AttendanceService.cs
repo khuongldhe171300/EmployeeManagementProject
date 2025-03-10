@@ -15,10 +15,10 @@ namespace Services
     {
         private readonly IAttendanceRepository _attendanceRepo;
 
-//        public AttendanceService(AttendanceRepository attendanceRepo)
-//        {
-//            _attendanceRepo = attendanceRepo;
-//        }
+        public AttendanceService(AttendanceRepository attendanceRepo)
+        {
+            _attendanceRepo = attendanceRepo;
+        }
 
         public void AddAttendance(Attendance attendance) => _attendanceRepo.AddAttendance(attendance);
 
