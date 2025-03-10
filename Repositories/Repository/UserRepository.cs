@@ -1,5 +1,6 @@
 ﻿using BusinessObjects.Models;
 using DataAssetObjects;
+using Microsoft.EntityFrameworkCore;
 using Repositories.Interface;
 using System;
 using System.Collections.Generic;
@@ -11,12 +12,6 @@ namespace Repositories.Repository
 {
     public class UserRepository : IUserRepository
     {
-        private readonly HrmanagementContext _context;
-        public UserRepository(HrmanagementContext context)
-        {
-            _context = context;
-        }
-
         public Task Add(User entity)
         {
             throw new NotImplementedException();
@@ -36,6 +31,29 @@ namespace Repositories.Repository
         {
             throw new NotImplementedException();
         }
+
+        //Thaodp
+        public User GetUserByUserNameAndPassword(string userName, string password)
+        {
+            using (HrmanagementContext _context = new HrmanagementContext())
+            {
+                var user = _context.Users.FirstOrDefault(u => u.Username == userName && u.PasswordHash == password);
+
+                if (user == null)
+                {
+                    throw new KeyNotFoundException("Không tìm thấy thông tin người dùng");
+                }
+
+                if (!user.IsActive)
+                {
+                    throw new UnauthorizedAccessException("Tài khoản không có quyền truy cập");
+                }
+
+                return user;
+            }
+           
+        }
+
 
         public Task Update(User entity)
         {
