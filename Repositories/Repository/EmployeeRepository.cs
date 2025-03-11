@@ -12,14 +12,26 @@ namespace Repositories.Repository
     public class EmployeeRepository : IEmployeeRepository
     {
 
-        private readonly HrmanagementContext _context;
-        public EmployeeRepository(HrmanagementContext context)
+        private readonly EmployeeDAO employeeDAO;
+
+        public EmployeeRepository()
         {
-            _context = context;
+            this.employeeDAO = new EmployeeDAO();
         }
+
         public Task Add(Employee entity)
         {
             throw new NotImplementedException();
+        }
+
+        public void AddEmployee(Employee employee)
+        {
+            employeeDAO.AddEmployee(employee);
+        }
+
+        public bool CheckEmailExisting(string email)
+        {
+           return employeeDAO.EmailExisting(email);
         }
 
         public Task Delete(int id)
@@ -27,7 +39,7 @@ namespace Repositories.Repository
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<Employee>> GetAll()
+        public  Task<IEnumerable<Employee>> GetAll()
         {
             throw new NotImplementedException();
         }
@@ -37,9 +49,19 @@ namespace Repositories.Repository
             throw new NotImplementedException();
         }
 
+        public List<Employee> GetEmployees()
+        {
+            return employeeDAO.GetEmployees();
+        }
+
         public Task Update(Employee entity)
         {
             throw new NotImplementedException();
+        }
+
+        public void UpdateEmployee(Employee employee)
+        {
+            employeeDAO.UpdateEmployeeById(employee);
         }
     }
 }

@@ -9,14 +9,17 @@ using System.Threading.Tasks;
 
 namespace Repositories.Repository
 {
-    public class PositionRepository : IPositionRepository
+    public class DepartmentReporsitory : IDepartmentRepository
     {
-        private readonly PositionDAO _positionDAO;
-        public PositionRepository()
+        private readonly DepartmentDAO _departmentDAO;
+
+
+        public DepartmentReporsitory()
         {
-            _positionDAO = new PositionDAO();
+            _departmentDAO = new DepartmentDAO();
         }
-        public Task Add(Position entity)
+
+        public Task Add(Department entity)
         {
             throw new NotImplementedException();
         }
@@ -26,22 +29,22 @@ namespace Repositories.Repository
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<Position>> GetAll()
+        public Task<IEnumerable<Department>> GetAll()
         {
             throw new NotImplementedException();
         }
 
-        public Task<Position> GetById(int id)
+        public Task<Department> GetById(int id)
         {
             throw new NotImplementedException();
         }
 
-        public List<Position> GetPositions()
+        public List<Department> GetDepartments()
         {
-           return _positionDAO.GetPositions();
+            return _departmentDAO.GetDepartments();
         }
 
-        public Task Update(Position entity)
+        public Task Update(Department entity)
         {
             throw new NotImplementedException();
         }

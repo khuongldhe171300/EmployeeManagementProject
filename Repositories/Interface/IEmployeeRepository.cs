@@ -9,6 +9,10 @@ namespace Repositories.Interface
 {
     public interface IEmployeeRepository : IRepository<Employee>
     {
-
+        List<Employee> GetEmployees();
+        void AddEmployee(Employee employee);
+        bool CheckEmailExisting(string email);
+        void UpdateEmployee(Employee employee);
     }
 }
+

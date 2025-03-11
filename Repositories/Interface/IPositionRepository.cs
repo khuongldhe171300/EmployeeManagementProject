@@ -9,5 +9,6 @@ namespace Repositories.Interface
 {
     public interface IPositionRepository : IRepository<Position> 
     {
+        List<Position> GetPositions();
     }
 }

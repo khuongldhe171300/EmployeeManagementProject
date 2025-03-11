@@ -9,5 +9,6 @@ namespace Repositories.Interface
 {
     public interface IDepartmentRepository : IRepository<Department>
     {
+        List<Department> GetDepartments();
     }
 }
