@@ -10,15 +10,15 @@ using System.Threading.Tasks;
 
 namespace Services.Service
 {
-    public class AttendanceService {  /*: IAttendanceService*/
-    //{
-    //    private readonly IAttendanceRepository _attendanceRepo;
+    public class AttendanceService : IAttendanceService
+    {
+        private readonly IAttendanceRepository _attendanceRepo;
 
-    //    public AttendanceService(AttendanceRepository attendanceRepo)
-    //    {
-    //        _attendanceRepo = attendanceRepo;
-    //    }
+        public AttendanceService(AttendanceRepository attendanceRepo)
+        {
+            _attendanceRepo = attendanceRepo;
+        }
 
-    //    List<Attendance> IAttendanceService.GetAttendanceByEmployeeId(int id) => _attendanceRepo.GetAttendanceByEmployeeId(id);
+        List<Attendance> IAttendanceService.GetAttendanceByEmployeeId(int id) => _attendanceRepo.GetAttendanceByEmployeeId(id);
     }
 }
