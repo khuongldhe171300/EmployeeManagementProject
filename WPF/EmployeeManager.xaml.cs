@@ -185,7 +185,7 @@ namespace WPF
             Employees = _employee.GetEmployees();
             Departments = _department.GetDepartments();
             Positions = _position.GetPositions();
-            lvEmployees.ItemsSource = Employees;
+            //lvEmployees.ItemsSource = Employees;
             cbDepartment.ItemsSource = Departments;
             cbPosition.ItemsSource = Positions;
         }

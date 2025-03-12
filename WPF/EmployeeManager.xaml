@@ -5,25 +5,23 @@
          xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
          xmlns:local="clr-namespace:WPF"
          mc:Ignorable="d" 
-         d:DesignHeight="550" d:DesignWidth="800">
+         d:DesignHeight="330" d:DesignWidth="800">
     <Grid Margin="10">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*" />
             <ColumnDefinition Width="7*" />
-            <ColumnDefinition Width="1.5*" />
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="220"/>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="250"/>
         </Grid.RowDefinitions>
 
-        <GroupBox Header="Ảnh đại diện" FontWeight="Bold" Padding="10" Grid.Column="0" Grid.Row="0">
+        <GroupBox Header="Ảnh đại diện" FontWeight="Bold" Padding="10" Grid.Column="0" Grid.Row="1">
             <Image x:Name="imgAvt" Source="Resource\icon\user1.png" Width="auto" Height="auto"/>
         </GroupBox>
         <!-- Thông tin nhân viên -->
-        <GroupBox Header="Thông tin nhân viên" FontWeight="Bold" Padding="10" Grid.Row="0" Grid.Column="1" Margin="10,0,0,0">
+        <GroupBox Header="Thông tin nhân viên" FontWeight="Bold" Padding="10" Grid.Row="1" Grid.Column="1" Margin="10,0,0,0">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="5*"/>
@@ -103,8 +101,8 @@
         </GroupBox>
 
         <!-- Chức năng -->
-        <GroupBox Header="Chức năng" Grid.Column="2" FontWeight="Bold" Margin="10,0,0,0"  Grid.Row="0">
-            <StackPanel>
+        <GroupBox Header="Chức năng" Grid.ColumnSpan="2" FontWeight="Bold"   Grid.Row="0" Height="80" VerticalAlignment="Top">
+            <StackPanel Orientation="Horizontal" Height="35">
                 <Button x:Name="btnAdd" Content="Thêm" Margin="5" Width="80" Click="btnAdd_Click"/>
                 <Button x:Name="btnUpdate" Content="Sửa" Margin="5" Width="80" Click="btnUpdate_Click"/>
                 <Button x:Name="btnDelete" Content="Xóa" Margin="5" Width="80" Click="btnDelete_Click"/>
@@ -114,7 +112,7 @@
 
         <!--Danh sách nhân viên-->
 
-        <StackPanel Grid.Row="2" Grid.ColumnSpan="3">
+        <!--<StackPanel Grid.Row="2" Grid.ColumnSpan="3">
             <ListView x:Name="lvEmployees" ItemsSource="{Binding Path=Employees}" Height="auto" MouseLeftButtonUp="Member_MouseLeftButtonUp">
                 <ListView.View>
                     <GridView>
@@ -132,6 +130,6 @@
                     </GridView>
                 </ListView.View>
             </ListView>
-        </StackPanel>
+        </StackPanel>-->
     </Grid>
 </Window>
