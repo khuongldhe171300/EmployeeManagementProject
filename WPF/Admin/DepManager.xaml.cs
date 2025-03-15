@@ -233,7 +233,7 @@ namespace WPF.Admin
 
         private void EmpSuggestionList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (EmpSuggestionList.SelectedItem is Employee selectedEmp)
+            if (EmpSuggestionList.SelectedItem is BusinessObjects.Models.Employee selectedEmp)
             {
                 EmpNameTextBox.Text = selectedEmp.FullName;
                 EmpNameTextBox.Tag = selectedEmp.EmployeeId;

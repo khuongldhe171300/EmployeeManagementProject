@@ -12,34 +12,15 @@ namespace Repositories.Repository
     public class PayrollRepository : IPayrollRepository
     {
 
-        private readonly HrmanagementContext _context;
-        public PayrollRepository(HrmanagementContext context)
+        private readonly PayrollDAO payrollDAO;
+        public PayrollRepository(PayrollDAO payrollDAO)
         {
-            _context = context;
+            this.payrollDAO = payrollDAO;
         }
-        public Task Add(Payroll entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task Delete(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<IEnumerable<Payroll>> GetAll()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Payroll> GetById(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task Update(Payroll entity)
-        {
-            throw new NotImplementedException();
-        }
+        public List<Payroll> GetPayrollByEmp(int employeeId) => payrollDAO.GetPayrollByEmp(employeeId);
+        public List<Payroll> GetPayrollByMonth(int employeeId, int month, int year) => payrollDAO.GetPayrollByMonth(employeeId, month, year);
+        public int GetTotalWorkingHours(int employeeId, int month, int year) => payrollDAO.GetTotalWorkingHours(employeeId, month, year);
+        public int GetTotalOutTime(int employeeId, int month, int year) => payrollDAO.GetTotalOutTime(employeeId, month, year);
+        public int GetTotalSalary(int employeeId, int month, int year) => payrollDAO.GetTotalSalary(employeeId, month, year);
     }
 }

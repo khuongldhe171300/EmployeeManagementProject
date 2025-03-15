@@ -1,13 +1,13 @@
-﻿using BusinessObjects.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BusinessObjects.Models;
 
-namespace Repositories.Interface
+namespace Services.InterfaceServie
 {
-    public interface IPayrollRepository 
+    public interface IPayrollService
     {
         List<Payroll> GetPayrollByEmp(int employeeId);
         List<Payroll> GetPayrollByMonth(int employeeId, int month, int year);
