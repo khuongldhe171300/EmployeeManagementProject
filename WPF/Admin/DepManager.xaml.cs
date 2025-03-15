@@ -76,7 +76,7 @@ namespace WPF.Admin
                 {
                     DepartmentName = NameTextBox.Text.Trim(),
                     Description = DescriptionTextBox.Text.Trim(),
-                    Status = StatusBox.Text.Trim() == "Active" ? true : false
+                    Status = StatusBox.Text.Trim() == "Hoạt Động" ? true : false
                 };
                 departmentService.AddDepartment(newDepartment);
                 MessageBox.Show("Thêm thành công!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -133,7 +133,7 @@ namespace WPF.Admin
             {
                 department.DepartmentName = NameTextBox.Text;
                 department.Description = DescriptionTextBox.Text;
-                department.Status = StatusBox.Text.Trim() == "Active" ? true : false;
+                department.Status = StatusBox.Text.Trim() == "Hoạt Động" ? true : false;
                 departmentService.UpdateDepartment(department);
                 MessageBox.Show("Cập nhật thành công!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
                 loadDepartments();
@@ -203,7 +203,14 @@ namespace WPF.Admin
             {
                 NameTextBox.Text = seletedDepartment.DepartmentName;
                 DescriptionTextBox.Text = seletedDepartment.Description;
-                StatusBox.Text = (bool)seletedDepartment.Status ? "Active" : "Inactive";
+                if (seletedDepartment.Status == true)
+                {
+                    StatusBox.Text = "Hoạt Động";
+                }
+                else
+                {
+                    StatusBox.Text = "Không Hoạt Động";
+                }
             }
         }
 

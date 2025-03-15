@@ -28,7 +28,7 @@
                 <Label Content="Trạng Thái:" Foreground="White"/>
                 <ComboBox Name="StatusBox" Height="20" BorderBrush="#D5D8DC">
                     <ComboBoxItem Content="Hoạt Động"/>
-                    <ComboBoxItem Content="Không Hoạt Động "/>
+                    <ComboBoxItem Content="Không Hoạt Động"/>
                 </ComboBox>
 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
