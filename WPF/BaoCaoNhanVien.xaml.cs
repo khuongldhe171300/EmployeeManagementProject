@@ -1,5 +1,4 @@
-﻿using DataAccessLayer;
-using DataAssetObjects;
+﻿using DataAssetObjects;
 using iTextSharp.text.pdf;
 using iTextSharp.text;
 using LiveCharts;

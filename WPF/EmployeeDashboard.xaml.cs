@@ -45,8 +45,9 @@ namespace WPF
 
         private void BaoCaoLuong_Click(object sender, RoutedEventArgs e)
         {
+            BaoCaoLuongNhanVien baoCaoLuongNhanVien = new BaoCaoLuongNhanVien();
+            baoCaoLuongNhanVien.Show();
             this.Close(); // Đóng cửa sổ hiện tại, quay về màn hình trước
-
         }
 
         private void Profile_Click(object sender, RoutedEventArgs e)

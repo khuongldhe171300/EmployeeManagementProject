@@ -1,6 +1,5 @@
 ﻿using BusinessObjects.Models;
 using ClosedXML.Excel;
-using DataAccessLayer;
 using DataAssetObjects;
 using LiveCharts;
 using LiveCharts.Wpf;
