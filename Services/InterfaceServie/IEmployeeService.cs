@@ -1,15 +1,14 @@
-﻿using BusinessObjects.Models;
-using DataAccessLayer;
+﻿using DataAccessLayer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Repositories.Interface
+namespace Services.InterfaceServie
 {
-    public interface IEmployeeRepository : IRepository<Employee>
-    {
+	public interface IEmployeeService
+	{
 		List<DepartmentReport> GetEmployeeCountByDepartment();
 		List<PositionReport> GetEmployeeCountByPosition();
 		List<GenderReport> GetEmployeeCountByGender();

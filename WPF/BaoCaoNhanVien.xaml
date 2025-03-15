@@ -1,0 +1,41 @@
+﻿<Window x:Class="WPF.BaoCaoNhanVien"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPF"
+        WindowStartupLocation="CenterScreen"
+        mc:Ignorable="d"
+        Title="Báo Cáo Nhân Viên" Height="600" Width="850" Background="#f4f4f4">
+    <Grid Margin="10">
+        <StackPanel Orientation="Vertical" Background="White" Margin="15">
+            <TextBlock Text="BÁO CÁO NHÂN VIÊN" FontSize="20" FontWeight="Bold" Foreground="#333" HorizontalAlignment="Center"/>
+
+            <TextBlock Text="📊 Thống kê nhân viên theo Phòng Ban" FontSize="16" FontWeight="Bold" Foreground="#007acc" Margin="0,10,0,5"/>
+            <DataGrid x:Name="DepartmentReportGrid" Height="120" AutoGenerateColumns="False" Background="White" BorderBrush="#ddd" BorderThickness="1">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Phòng Ban" Binding="{Binding DepartmentName}" Width="*"/>
+                    <DataGridTextColumn Header="Số Nhân Viên" Binding="{Binding EmployeeCount}" Width="Auto"/>
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <TextBlock Text="🛠️ Thống kê nhân viên theo Chức Vụ" FontSize="16" FontWeight="Bold" Foreground="#007acc" Margin="0,10,0,5"/>
+            <DataGrid x:Name="PositionReportGrid" Height="120" AutoGenerateColumns="False" Background="White" BorderBrush="#ddd" BorderThickness="1">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Chức Vụ" Binding="{Binding PositionName}" Width="*"/>
+                    <DataGridTextColumn Header="Số Nhân Viên" Binding="{Binding EmployeeCount}" Width="Auto"/>
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <TextBlock Text="👥 Thống kê nhân viên theo Giới Tính" FontSize="16" FontWeight="Bold" Foreground="#007acc" Margin="0,10,0,5"/>
+            <DataGrid x:Name="GenderReportGrid" Height="100" AutoGenerateColumns="False" Background="White" BorderBrush="#ddd" BorderThickness="1">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Giới Tính" Binding="{Binding Gender}" Width="*"/>
+                    <DataGridTextColumn Header="Số Nhân Viên" Binding="{Binding EmployeeCount}" Width="Auto"/>
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <Button Content="📥 Tải báo cáo" Click="LoadReport_Click" Margin="0,15,0,0" Width="200" Height="40" Background="#007acc" Foreground="White" FontWeight="Bold" HorizontalAlignment="Center"/>
+        </StackPanel>
+    </Grid>
+</Window>
