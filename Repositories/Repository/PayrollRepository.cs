@@ -11,11 +11,11 @@ namespace Repositories.Repository
 {
     public class PayrollRepository : IPayrollRepository
     {
-
-        private readonly HrmanagementContext _context;
-        public PayrollRepository(HrmanagementContext context)
+		
+		private readonly PayrollDAO payrollDAO;
+        public PayrollRepository(PayrollDAO payrollDAO)
         {
-            _context = context;
+			this.payrollDAO = payrollDAO;
         }
         public Task Add(Payroll entity)
         {
@@ -41,5 +41,9 @@ namespace Repositories.Repository
         {
             throw new NotImplementedException();
         }
-    }
+
+		List<Payroll> IPayrollRepository.GetAll() => payrollDAO.GetAll();
+
+		Payroll IPayrollRepository.GetById(int id) => payrollDAO.GetById(id);
+	}
 }

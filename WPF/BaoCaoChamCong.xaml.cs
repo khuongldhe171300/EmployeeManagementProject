@@ -56,9 +56,15 @@ namespace WPF
 
         private void Back_Click(object sender, RoutedEventArgs e)
         {
-            EmployeeDashboard employeeDashboard = new EmployeeDashboard();
-            employeeDashboard.Show();
-            this.Close(); // Đóng cửa sổ hiện tại, quay về màn hình trước
-        }
+			int employeeId = 2;
+            if (employeeId == 1)
+            {
+                //thêm ở dây là trở về màn hình AdminDashboard
+
+            }
+			EmployeeDashboard employeeDashboard = new EmployeeDashboard();
+			employeeDashboard.Show();
+			this.Close(); // Đóng cửa sổ hiện tại, quay về màn hình trước
+		}
     }
 }

@@ -5,10 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Repositories.Interface
+namespace Services.InterfaceServie
 {
-    public interface IPayrollRepository : IRepository<Payroll>
-    {
+	public interface IPayrollService
+	{
 		Payroll GetById(int id);
 		List<Payroll> GetAll();
 	}
