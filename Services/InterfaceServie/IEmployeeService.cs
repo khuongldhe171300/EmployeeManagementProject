@@ -1,4 +1,6 @@
 ﻿using System;
+﻿using DataAccessLayer;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,5 +14,8 @@ namespace Services.InterfaceServie
         Employee GetEmployeeByID(int id);
         void UpdateEmployee(Employee employee);
         User GetUserByEmpID(int empID);
+        List<DepartmentReport> GetEmployeeCountByDepartment();
+		List<PositionReport> GetEmployeeCountByPosition();
+		List<GenderReport> GetEmployeeCountByGender();
     }
 }

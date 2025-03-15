@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -66,5 +66,14 @@ namespace DataAssetObjects
             int Tax = (int)(BasicSalary * 5 / 100);
             return BasicSalary * StandardHours/160 + OT * 50000 + 500000 - Insurance - Tax;
         }
+        public List<Payroll> GetAll()
+		{
+			return context.Payrolls.ToList();
+		}
+
+		public Payroll GetById(int id)
+		{
+			return context.Payrolls.FirstOrDefault(e => e.EmployeeId == id);
+		}
     }
 }

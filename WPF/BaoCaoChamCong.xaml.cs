@@ -2,6 +2,7 @@
 using DataAssetObjects;
 using Repositories.Repository;
 using Services;
+using Services.InterfaceServie;
 using Services.Service;
 using System;
 using System.Collections.Generic;
@@ -39,13 +40,31 @@ namespace WPF
 
         private void GenerateReport_Click(object sender, RoutedEventArgs e)
         {
+            int employeeId = 2;
+
             // Lấy giá trị tháng từ ComboBox
             int month = int.Parse((MonthComboBox.SelectedItem as ComboBoxItem)?.Content.ToString() ?? "0");
             int year = int.Parse(YearTextBox.Text);
 
-            var leaveSummaryList = _leaveRequestService.GetLeaveSummary(-1, month, year);
+            // Xác định tham số employeeId để truyền vào GetLeaveSummary
+            int queryEmployeeId = (employeeId == 1) ? -1 : employeeId;
+
+            var leaveSummaryList = _leaveRequestService.GetLeaveSummary(queryEmployeeId, month, year);
             ReportDataGrid.ItemsSource = leaveSummaryList;
         }
 
+
+        private void Back_Click(object sender, RoutedEventArgs e)
+        {
+			int employeeId = 2;
+            if (employeeId == 1)
+            {
+                //thêm ở dây là trở về màn hình AdminDashboard
+
+            }
+			EmployeeDashboard employeeDashboard = new EmployeeDashboard();
+			employeeDashboard.Show();
+			this.Close(); // Đóng cửa sổ hiện tại, quay về màn hình trước
+		}
     }
 }

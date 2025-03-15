@@ -1,4 +1,8 @@
-﻿using System;
+﻿using BusinessObjects.Models;
+using DataAssetObjects;
+using Repositories.Interface;
+using Services.InterfaceServie;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,6 +25,9 @@ namespace Services.Service
         public int GetTotalWorkingHours(int employeeId, int month, int year) => payrollRepository.GetTotalWorkingHours(employeeId, month, year);
         public int GetTotalOutTime(int employeeId, int month, int year) => payrollRepository.GetTotalOutTime(employeeId, month, year);
         public int GetTotalSalary(int employeeId, int month, int year) => payrollRepository.GetTotalSalary(employeeId, month, year);
+        public List<Payroll> GetAll() => payrollRepository.GetAll();
+
+		public Payroll GetById(int id) => payrollRepository.GetById(id);
 
     }
 }

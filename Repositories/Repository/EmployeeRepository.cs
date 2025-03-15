@@ -1,4 +1,5 @@
 ﻿using BusinessObjects.Models;
+using DataAccessLayer;
 using DataAssetObjects;
 using Repositories.Interface;
 using System;
@@ -37,7 +38,13 @@ namespace Repositories.Repository
             throw new NotImplementedException();
         }
 
-        public Task Update(Employee entity)
+		public List<DepartmentReport> GetEmployeeCountByDepartment() => employeeDAO.GetEmployeeCountByDepartment();
+
+		public List<GenderReport> GetEmployeeCountByGender() => employeeDAO.GetEmployeeCountByGender();
+
+		public List<PositionReport> GetEmployeeCountByPosition() => employeeDAO.GetEmployeeCountByPosition();
+
+		public Task Update(Employee entity)
         {
             throw new NotImplementedException();
         }

@@ -2,7 +2,7 @@
 using DataAssetObjects;
 using Repositories.Repository;
 using Services;
-using Services.Service;
+using Services.InterfaceServie;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -139,6 +139,8 @@ namespace WPF
 
         private void Back_Click(object sender, RoutedEventArgs e)
         {
+            EmployeeDashboard employeeDashboard = new EmployeeDashboard();
+            employeeDashboard.Show();
             this.Close(); // Đóng cửa sổ hiện tại, quay về màn hình trước
         }
     }

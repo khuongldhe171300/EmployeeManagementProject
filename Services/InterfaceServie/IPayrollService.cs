@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,5 +14,7 @@ namespace Services.InterfaceServie
         int GetTotalWorkingHours(int employeeId, int month, int year);
         int GetTotalOutTime(int employeeId, int month, int year);
         int GetTotalSalary(int employeeId, int month, int year);
+        Payroll GetById(int id);
+		List<Payroll> GetAll();
     }
 }

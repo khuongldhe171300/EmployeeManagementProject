@@ -14,5 +14,7 @@ namespace Repositories.Interface
         int GetTotalWorkingHours(int employeeId, int month, int year);
         int GetTotalOutTime(int employeeId, int month, int year);
         int GetTotalSalary(int employeeId, int month, int year);
-    }
+		Payroll GetById(int id);
+		List<Payroll> GetAll();
+	}
 }

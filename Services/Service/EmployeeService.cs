@@ -1,4 +1,7 @@
-﻿using System;
+﻿using DataAccessLayer;
+using Repositories.Repository;
+using Services.InterfaceServie;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,5 +22,10 @@ namespace Services.Service
         public Employee GetEmployeeByID(int id) => employeeRepository.GetEmployeeByID(id);
         public void UpdateEmployee(Employee employee) => employeeRepository.UpdateEmployee(employee);
         public User GetUserByEmpID(int empID) => employeeRepository.GetUserByEmpID(empID);
+        public List<DepartmentReport> GetEmployeeCountByDepartment() => employeeRepository.GetEmployeeCountByDepartment();
+
+		public List<GenderReport> GetEmployeeCountByGender() => employeeRepository.GetEmployeeCountByGender();
+
+		public List<PositionReport> GetEmployeeCountByPosition() => employeeRepository.GetEmployeeCountByPosition();
     }
 }
