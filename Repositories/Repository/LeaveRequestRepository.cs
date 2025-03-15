@@ -11,11 +11,13 @@ namespace Repositories.Repository
 {
     public class LeaveRequestRepository :ILeaveRequestRepository
     {
-        private readonly HrmanagementContext _context;
-        public LeaveRequestRepository(HrmanagementContext context)
+        private readonly LeaveRequestDAO leaveRequestDAO;
+
+        public LeaveRequestRepository(LeaveRequestDAO _leaveRequestDAO)
         {
-            _context = context;
+            leaveRequestDAO = _leaveRequestDAO;
         }
+
 
         public Task Add(LeaveRequest entity)
         {
@@ -36,6 +38,8 @@ namespace Repositories.Repository
         {
             throw new NotImplementedException();
         }
+
+        public List<LeaveSummary> GetLeaveSummary(int employeeId, int month, int year) => leaveRequestDAO.GetLeaveSummary(employeeId, month, year);
 
         public Task Update(LeaveRequest entity)
         {

@@ -11,15 +11,19 @@ namespace Repositories.Repository
 {
     public class AttendanceRepository : IAttendanceRepository
     {
-        private readonly HrmanagementContext _context;
-        public AttendanceRepository(HrmanagementContext context)
+        private readonly AttendanceDAO attendanceDAO;
+
+        public AttendanceRepository(AttendanceDAO _attendanceDAO)
         {
-            _context = context;
+            attendanceDAO = _attendanceDAO;
         }
+        
         public Task Add(Attendance entity)
         {
             throw new NotImplementedException();
         }
+
+        public void AddAttendance(Attendance attendance) => attendanceDAO.AddAttendance(attendance);
 
         public Task Delete(int id)
         {
@@ -27,6 +31,11 @@ namespace Repositories.Repository
         }
 
         public Task<IEnumerable<Attendance>> GetAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Attendance? GetAttendanceByEmployeeId(int id)
         {
             throw new NotImplementedException();
         }
@@ -40,5 +49,9 @@ namespace Repositories.Repository
         {
             throw new NotImplementedException();
         }
+
+        public void UpdateAttendance(Attendance attendance) => attendanceDAO.UpdateAttendance(attendance);
+
+        List<Attendance> IAttendanceRepository.GetAttendanceByEmployeeId(int id) => attendanceDAO.GetAttendanceByEmployeeId(id);
     }
 }
