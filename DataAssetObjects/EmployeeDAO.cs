@@ -73,6 +73,16 @@ namespace DataAssetObjects
 				})
 				.ToList();
 		}
+
+
+	
+
+        public async Task<IEnumerable<Employee>> GetAll()
+        {
+            return await _context.Employees.Include(e => e.Position).Include(e => e.Department).ToListAsync();
+        }
+
+      
 	}
 
 	public class DepartmentReport
