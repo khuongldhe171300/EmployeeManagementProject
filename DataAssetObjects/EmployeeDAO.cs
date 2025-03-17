@@ -1,10 +1,13 @@
-﻿using BusinessObjects.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BusinessObjects.Models;
+using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.Data.SqlClient;
+using DataAssetObjects;
 
 namespace DataAssetObjects
 {
@@ -17,6 +20,11 @@ namespace DataAssetObjects
             _context = new HrmanagementContext();
         }
 
+        public Employee GetEmployeeByID(int id)
+        {
+            return _context.Employees.Include(e => e.Position).Include(e => e.Department).FirstOrDefault(e => e.EmployeeId == id);
+        }
+
         public List<Employee> GetEmployees()
         {
             return _context.Employees
@@ -24,6 +32,7 @@ namespace DataAssetObjects
                             .Include(e => e.Position)
                             .ToList();
         }
+
         public void AddEmployee(Employee employee, string password)
         {
             if (employee == null) throw new ArgumentNullException(nameof(employee));
@@ -88,5 +97,80 @@ namespace DataAssetObjects
         {
             return BCrypt.Net.BCrypt.HashPassword(password);
         }
-    }
+
+        public void UpdateEmployee(Employee employee)
+        {
+            _context.Employees.Update(employee);
+            _context.SaveChanges();
+        }
+
+        public User GetUserByEmpID(int empID)
+        {
+            return _context.Users.FirstOrDefault(u => u.EmployeeId == empID);
+        }
+        
+		public List<DepartmentReport> GetEmployeeCountByDepartment()
+		{
+			return _context.Employees
+				.GroupBy(e => e.DepartmentId)
+				.Select(g => new DepartmentReport
+				{
+					DepartmentName = _context.Departments
+						.Where(d => d.DepartmentId == g.Key)
+						.Select(d => d.DepartmentName)
+						.FirstOrDefault() ?? "Không xác định",
+					EmployeeCount = g.Count()
+				})
+				.ToList();
+		}
+
+		public List<PositionReport> GetEmployeeCountByPosition()
+		{
+			return _context.Employees
+				.GroupBy(e => e.PositionId)
+				.Select(g => new PositionReport
+				{
+					PositionName = _context.Positions
+						.Where(p => p.PositionId == g.Key)
+						.Select(p => p.PositionName)
+						.FirstOrDefault() ?? "Không xác định",
+					EmployeeCount = g.Count()
+				})
+				.ToList();
+		}
+
+
+		public List<GenderReport> GetEmployeeCountByGender()
+		{
+			return _context.Employees
+				.GroupBy(e => e.Gender)
+				.Select(g => new GenderReport
+				{
+					Gender = g.Key,
+					EmployeeCount = g.Count()
+				})
+				.ToList();
+		}
+	}
+
+	public class DepartmentReport
+	{
+		public string DepartmentName { get; set; }
+		public int EmployeeCount { get; set; }
+	}
+
+	public class PositionReport
+	{
+		public string PositionName { get; set; }
+		public int EmployeeCount { get; set; }
+	}
+
+	public class GenderReport
+	{
+		public string Gender { get; set; }
+		public int EmployeeCount { get; set; }
+	}
 }
+      
+        
+

@@ -13,10 +13,9 @@ namespace Repositories.Repository
     {
 
         private readonly EmployeeDAO employeeDAO;
-
-        public EmployeeRepository()
+        public EmployeeRepository(EmployeeDAO employeeDAO)
         {
-            this.employeeDAO = new EmployeeDAO();
+            this.employeeDAO = employeeDAO;
         }
 
         public Task Add(Employee entity)
@@ -49,19 +48,28 @@ namespace Repositories.Repository
             throw new NotImplementedException();
         }
 
-        public List<Employee> GetEmployees()
+		public List<DepartmentReport> GetEmployeeCountByDepartment() => employeeDAO.GetEmployeeCountByDepartment();
+
+		public List<GenderReport> GetEmployeeCountByGender() => employeeDAO.GetEmployeeCountByGender();
+
+		public List<PositionReport> GetEmployeeCountByPosition() => employeeDAO.GetEmployeeCountByPosition();
+
+		public Task Update(Employee entity)
+        {
+            throw new NotImplementedException();
+        }
+        public Employee GetEmployeeByID(int id) => employeeDAO.GetEmployeeByID(id);
+        public void UpdateEmployee(Employee employee) => employeeDAO.UpdateEmployee(employee);
+        public User GetUserByEmpID(int empID) => employeeDAO.GetUserByEmpID(empID);
+
+         public List<Employee> GetEmployees()
         {
             return employeeDAO.GetEmployees();
         }
 
-        public Task Update(Employee entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void UpdateEmployee(Employee employee)
-        {
-            employeeDAO.UpdateEmployeeById(employee);
-        }
+        // public void UpdateEmployee(Employee employee)
+        // {
+        //     employeeDAO.UpdateEmployeeById(employee);
+        // }
     }
 }

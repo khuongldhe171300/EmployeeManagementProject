@@ -1,7 +1,15 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
 using Repositories.Interface;
 using Repositories.Repository;
+using WPF.Employee;
 
 namespace WPF
 {
@@ -40,6 +48,8 @@ namespace WPF
                             this.Close();
                             break;
                         case "User":
+                            new EmployeeProfile(user).Show();
+                            this.Close();
                             break;
                         default:
                             MessageBox.Show("Tài khoản chưa được cấp quyền");

@@ -8,9 +8,19 @@
 		<UseWPF>true</UseWPF>
 	</PropertyGroup>
 
-	<ItemGroup>
-		<None Remove="Resource\icon\user1.png" />
-	</ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="ClosedXML" Version="0.104.2" />
+    <PackageReference Include="itext7" Version="9.1.0" />
+    <PackageReference Include="iTextSharp" Version="5.5.13.4" />
+    <PackageReference Include="LiveCharts.Wpf" Version="0.9.7" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BusinessObjects\BusinessObjects.csproj" />
+    <ProjectReference Include="..\DataAssetObjects\DataAssetObjects.csproj" />
+    <ProjectReference Include="..\Repositories\Repositories.csproj" />
+    <ProjectReference Include="..\Services\Services.csproj" />
+  </ItemGroup>
 
 	<ItemGroup>
 		<Content Include="Resource\icon\user1.png">
