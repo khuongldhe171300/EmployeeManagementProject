@@ -64,7 +64,11 @@ namespace WPF
 
 		private void LoadData()
 		{
+			//Nếu chỉ lấy lương của cá nhân id = 2
+			//_payrollData = payrollService.GetPayrollByEmp(2);
+
 			_payrollData = payrollService.GetAll();
+
 			FilterData();
 		}
 
