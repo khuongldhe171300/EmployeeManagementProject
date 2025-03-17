@@ -2,12 +2,10 @@
 using Microsoft.Win32;
 using Repositories.Interface;
 using Repositories.Repository;
-using System.Net;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
-using System.Xml.Linq;
 
 namespace WPF
 {
@@ -108,7 +106,7 @@ namespace WPF
                         employee.Avatar = "Resource/icon/user1.png";
                     }
 
-                    _employee.AddEmployee(employee, password);
+                    _employee.AddEmployee(employee, password, username);
                     LoadData();
                     MessageBox.Show("Thêm nhân viên thành công");
                 }
