@@ -45,8 +45,8 @@ namespace WPF
                         case "Admin":
                             
                             break;
-                        case "User":
-                            new EmployeeProfile(user).Show();
+                        case "Employee":
+                            new EmployeeDashboard(user.EmployeeId).Show();
                             this.Close();
                             break;
                         default:

@@ -14,13 +14,14 @@ namespace WPF
     public partial class ChamCong : Window
     {
         private readonly IAttendanceService _attendanceService;
-        private int currentEmployeeId = 1; // Giả sử ID nhân viên đăng nhập là 1
+        private int currentEmployeeId; // Giả sử ID nhân viên đăng nhập là 1
         public ObservableCollection<Attendance> AttendanceList { get; set; } = new ObservableCollection<Attendance>();
 
-        public ChamCong()
+        public ChamCong(int empID)
         {
             InitializeComponent();
-            var _context = new HrmanagementContext();
+			currentEmployeeId = empID;
+			var _context = new HrmanagementContext();
             var attendanceDAO = new AttendanceDAO(_context);
             var attendanceRepo = new AttendanceRepository(attendanceDAO);
             _attendanceService = new AttendanceService(attendanceRepo);
@@ -139,7 +140,7 @@ namespace WPF
 
         private void Back_Click(object sender, RoutedEventArgs e)
         {
-            EmployeeDashboard employeeDashboard = new EmployeeDashboard();
+            EmployeeDashboard employeeDashboard = new EmployeeDashboard(currentEmployeeId);
             employeeDashboard.Show();
             this.Close(); // Đóng cửa sổ hiện tại, quay về màn hình trước
         }
