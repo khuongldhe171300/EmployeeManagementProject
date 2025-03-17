@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Repositories.Interface
+namespace Services.InterfaceServie
 {
-    public interface IAttendanceRepository : IRepository<Attendance>
+    public interface IAttendanceService
     {
         List<Attendance> GetAttendanceByEmployeeId(int id);
         void UpdateAttendance(Attendance attendance);

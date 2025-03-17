@@ -1,0 +1,107 @@
+﻿<Window x:Class="WPF.BaoCaoLuongNhanVien"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPF"
+        xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+        mc:Ignorable="d"
+        Title="Thống kê lương nhân viên" Height="700" Width="850"
+        WindowStartupLocation="CenterScreen"
+        Background="#F4F4F4">
+
+    <Grid Margin="10">
+        <StackPanel>
+
+            <!-- Bộ lọc -->
+            <GroupBox Header="Bộ lọc thống kê" FontWeight="Bold" Padding="10">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+
+                    <!-- Chọn tháng -->
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Tháng:" VerticalAlignment="Center" FontWeight="Bold"/>
+                        <ComboBox x:Name="MonthComboBox" Width="80" SelectionChanged="OnFilterChanged" Margin="5,0">
+                            <ComboBoxItem Content="Tất cả" IsSelected="True"/>
+                            <ComboBoxItem Content="1"/>
+                            <ComboBoxItem Content="2"/>
+                            <ComboBoxItem Content="3"/>
+                            <ComboBoxItem Content="4"/>
+                            <ComboBoxItem Content="5"/>
+                            <ComboBoxItem Content="6"/>
+                            <ComboBoxItem Content="7"/>
+                            <ComboBoxItem Content="8"/>
+                            <ComboBoxItem Content="9"/>
+                            <ComboBoxItem Content="10"/>
+                            <ComboBoxItem Content="11"/>
+                            <ComboBoxItem Content="12"/>
+                        </ComboBox>
+                    </StackPanel>
+
+                    <!-- Chọn quý -->
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Quý:" VerticalAlignment="Center" FontWeight="Bold"/>
+                        <ComboBox x:Name="QuarterComboBox" Width="80" SelectionChanged="OnFilterChanged" Margin="5,0">
+                            <ComboBoxItem Content="Tất cả" IsSelected="True"/>
+                            <ComboBoxItem Content="Quý 1"/>
+                            <ComboBoxItem Content="Quý 2"/>
+                            <ComboBoxItem Content="Quý 3"/>
+                            <ComboBoxItem Content="Quý 4"/>
+                        </ComboBox>
+                    </StackPanel>
+
+                    <!-- Chọn năm -->
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Năm:" VerticalAlignment="Center" FontWeight="Bold"/>
+                        <ComboBox x:Name="YearComboBox" Width="100" SelectionChanged="OnFilterChanged" Margin="5,0"/>
+                    </StackPanel>
+
+                </StackPanel>
+            </GroupBox>
+
+            <!-- Bảng dữ liệu -->
+            <GroupBox Header="Danh sách lương nhân viên" FontWeight="Bold" Padding="10" Margin="0,10,0,0">
+                <DataGrid x:Name="PayrollDataGrid" AutoGenerateColumns="False" Margin="0,10,0,0"
+                          RowHeight="35" HeadersVisibility="Column"
+                          AlternatingRowBackground="#EFEFEF" BorderBrush="#CCC"
+                          GridLinesVisibility="All">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Mã NV" Binding="{Binding EmployeeId}" Width="70"/>
+                        <DataGridTextColumn Header="Tháng" Binding="{Binding PayrollMonth}" Width="70"/>
+                        <DataGridTextColumn Header="Lương cơ bản" Binding="{Binding BasicSalary}" Width="120"/>
+                        <DataGridTextColumn Header="Phụ cấp" Binding="{Binding Allowance}" Width="100"/>
+                        <DataGridTextColumn Header="Thưởng" Binding="{Binding Bonus}" Width="100"/>
+                        <DataGridTextColumn Header="Tổng lương" Binding="{Binding TotalSalary}" Width="120"/>
+                        <DataGridTextColumn Header="Ngày thanh toán" Binding="{Binding PaymentDate}" Width="120"/>
+                        <DataGridTextColumn Header="Trạng thái" Binding="{Binding PaymentStatus}" Width="100"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </GroupBox>
+
+            <!-- Tổng lương & Xuất báo cáo -->
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,0,0">
+                <TextBlock x:Name="TotalSalaryText" FontSize="16" FontWeight="Bold"
+                           Foreground="DarkGreen" Text="Tổng lương: 0 VNĐ" VerticalAlignment="Center"/>
+                <Button Content="Xuất báo cáo" Width="150" Height="40" Margin="20,0,0,0"
+                        Background="RoyalBlue" Foreground="White" FontWeight="Bold" 
+                        Click="ExportReport_Click"/>
+                <Button Content="Quay lại" Width="150" Height="40" Margin="20,0,0,0"
+Background="#DC3545" Foreground="White" FontWeight="Bold"
+Click="Back_Click"/>
+            </StackPanel>
+            <GroupBox Header="Biểu đồ lương theo tháng" FontWeight="Bold" Padding="10" Margin="0,10,0,0">
+                <lvc:CartesianChart x:Name="SalaryChart" Height="300">
+                    <lvc:CartesianChart.Series>
+                        <lvc:ColumnSeries Title="Tổng Lương" Values="{Binding SalaryChartValues}" Fill="RoyalBlue"/>
+                    </lvc:CartesianChart.Series>
+                    <lvc:CartesianChart.AxisX>
+                        <lvc:Axis Title="Tháng" Labels="{Binding SalaryChartLabels}"/>
+                    </lvc:CartesianChart.AxisX>
+                    <lvc:CartesianChart.AxisY>
+                        <lvc:Axis Title="Tổng Lương" LabelFormatter="{Binding YFormatter}"/>
+                    </lvc:CartesianChart.AxisY>
+                </lvc:CartesianChart>
+            </GroupBox>
+
+        </StackPanel>
+    </Grid>
+</Window>

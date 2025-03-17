@@ -12,10 +12,10 @@ namespace Repositories.Repository
     public class EmployeeRepository : IEmployeeRepository
     {
 
-        private readonly HrmanagementContext _context;
-        public EmployeeRepository(HrmanagementContext context)
+        private readonly EmployeeDAO employeeDAO;
+        public EmployeeRepository(EmployeeDAO employeeDAO)
         {
-            _context = context;
+            this.employeeDAO = employeeDAO;
         }
         public Task Add(Employee entity)
         {
@@ -37,9 +37,18 @@ namespace Repositories.Repository
             throw new NotImplementedException();
         }
 
-        public Task Update(Employee entity)
+		public List<DepartmentReport> GetEmployeeCountByDepartment() => employeeDAO.GetEmployeeCountByDepartment();
+
+		public List<GenderReport> GetEmployeeCountByGender() => employeeDAO.GetEmployeeCountByGender();
+
+		public List<PositionReport> GetEmployeeCountByPosition() => employeeDAO.GetEmployeeCountByPosition();
+
+		public Task Update(Employee entity)
         {
             throw new NotImplementedException();
         }
+        public Employee GetEmployeeByID(int id) => employeeDAO.GetEmployeeByID(id);
+        public void UpdateEmployee(Employee employee) => employeeDAO.UpdateEmployee(employee);
+        public User GetUserByEmpID(int empID) => employeeDAO.GetUserByEmpID(empID);
     }
 }

@@ -9,7 +9,7 @@ public partial class Position
 
     public string PositionName { get; set; } = null!;
 
-    public decimal BasicSalary { get; set; }
+    public int BasicSalary { get; set; }
 
     public string? Description { get; set; }
 

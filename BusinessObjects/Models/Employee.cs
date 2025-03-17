@@ -23,7 +23,7 @@ public partial class Employee
 
     public string? Avatar { get; set; }
 
-    public int DepartmentId { get; set; }
+    public int? DepartmentId { get; set; }
 
     public DateOnly StartDate { get; set; }
 
