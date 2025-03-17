@@ -7,8 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BusinessObjects.Models;
-using Repositories.Repository;
-using Services.InterfaceServie;
 
 namespace Services.Service
 {
@@ -27,5 +25,10 @@ namespace Services.Service
 		public List<GenderReport> GetEmployeeCountByGender() => employeeRepository.GetEmployeeCountByGender();
 
 		public List<PositionReport> GetEmployeeCountByPosition() => employeeRepository.GetEmployeeCountByPosition();
+
+        public async Task<IEnumerable<Employee>> GetAll()
+        {
+            return await employeeRepository.GetAll();
+        }
     }
 }
