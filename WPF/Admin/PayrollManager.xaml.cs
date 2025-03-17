@@ -11,25 +11,24 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using BusinessObjects.Models;
 using DataAssetObjects;
-using Repositories.Interface;
 using Repositories.Repository;
-using Services.InterfaceServie;
 using Services.Service;
+using BusinessObjects.Models;
+using WPF.Employee;
 using static System.Net.Mime.MediaTypeNames;
 
-namespace WPF.Employee
+namespace WPF.Admin
 {
     /// <summary>
-    /// Interaction logic for Payroll.xaml
+    /// Interaction logic for PayrollManager.xaml
     /// </summary>
-    public partial class Payroll : Window
+    public partial class PayrollManager : Window
     {
         private PayrollService payrollService;
         private readonly EmployeeService employeeService;
         int EmpID = 0;
-        public Payroll(BusinessObjects.Models.Employee emp)
+        public PayrollManager(BusinessObjects.Models.Employee emp)
         {
             InitializeComponent();
             HrmanagementContext context = new HrmanagementContext();
@@ -37,7 +36,7 @@ namespace WPF.Employee
             PayrollRepository payrollRepository = new PayrollRepository(payrollDAO);
             payrollService = new PayrollService(payrollRepository);
             employeeService = new EmployeeService(new EmployeeRepository(new EmployeeDAO(context)));
-            cbMonth.SelectedIndex = DateTime.Now.Month -1;
+            cbMonth.SelectedIndex = DateTime.Now.Month - 1;
             txtYear.Text = DateTime.Now.Year.ToString();
             EmpID = emp.EmployeeId;
             LoadDefaultData();
@@ -107,7 +106,8 @@ namespace WPF.Employee
                 txtTotalOutTime.Text = totalOutTime.ToString("N0") + " giờ";
                 txtTotalSalary.Text = "0 VNĐ";
             }
-            else {
+            else
+            {
                 // Hiển thị lên UI
                 txtTotalWorkingHours.Text = totalWorkingHours.ToString("N0") + " giờ";
                 txtTotalOutTime.Text = totalOutTime.ToString("N0") + " giờ";
@@ -122,6 +122,56 @@ namespace WPF.Employee
             employeeProfile.Show();
             this.Close();
         }
+
+        private void btnAdd_Click(object sender, RoutedEventArgs e)
+        {
+            int month = int.Parse((cbMonth.SelectedItem as ComboBoxItem)?.Content.ToString());
+            int year = int.Parse(txtYear.Text);
+            int totalWorkingHours = payrollService.GetTotalWorkingHours(EmpID, month, year);
+            int totalOutTime = payrollService.GetTotalOutTime(EmpID, month, year);
+            int totalSalary = payrollService.GetTotalSalary(EmpID, month, year);
+            int thisDay = DateTime.Now.Day;
+            if (string.IsNullOrWhiteSpace(txtTotalSalary.Text) || string.IsNullOrWhiteSpace(txtTotalOutTime.Text))
+            {
+                MessageBox.Show("Chưa đủ điều kiện kết toán", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            if (totalSalary <= 0)
+            {
+                MessageBox.Show("Lương không hợp lệ", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            if (month != DateTime.Now.Month - 1 || year != DateTime.Now.Year)
+            {
+                MessageBox.Show("Thời gian không hợp lệ", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            var existPayroll = payrollService.GetPayrollByMonthAndYear(EmpID, month, year);
+            if (existPayroll != null)
+            {
+                MessageBox.Show("Đã kết toán lương cho tháng này", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            try
+            {
+                var employee = employeeService.GetEmployeeByID(EmpID);
+                var newPay = new BusinessObjects.Models.Payroll();
+                newPay.EmployeeId = EmpID;
+                newPay.PayrollMonth = DateTime.Now.Month - 1;
+                newPay.BasicSalary = employee.Position.BasicSalary;
+                newPay.Allowance = 500000;
+                newPay.Bonus = totalOutTime * 50000;
+                newPay.TotalSalary = totalSalary;
+                newPay.PaymentDate = DateOnly.FromDateTime(DateTime.Now);
+                newPay.PaymentStatus = "Đang xử lý";
+                payrollService.AddPayroll(newPay);
+                LoadDefaultData();
+            }
+            catch (Exception ex)
+            {
+                // Log the exception or handle it as needed
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
     }
 }
-

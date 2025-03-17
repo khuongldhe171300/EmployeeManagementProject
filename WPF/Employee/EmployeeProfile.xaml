@@ -104,6 +104,7 @@
                 <Button x:Name="btnDayOff" Content="Ngày Nghỉ" Margin="5" Width="80" Click="btnDayOff_Click" />
                 <Button x:Name="btnPayroll" Content="Lương" Margin="5" Width="80" Click="btnPayroll_Click"/>
                 <Button x:Name="btnNotification" Content="Thông Báo" Margin="5" Width="80" Click="btnNotification_Click"/>
+                <Button x:Name="btnPay" Content=" Trả Lương" Margin="5" Width="80" Click="btnPay_Click" />
             </StackPanel>
         </GroupBox>
 
