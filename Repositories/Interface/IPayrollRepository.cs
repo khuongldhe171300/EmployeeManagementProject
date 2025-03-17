@@ -16,5 +16,8 @@ namespace Repositories.Interface
         int GetTotalSalary(int employeeId, int month, int year);
         void AddPayroll(Payroll payroll);
         Payroll GetPayrollByMonthAndYear(int employeeId, int month, int year);
-    }
+    
+		Payroll GetById(int id);
+		List<Payroll> GetAll();
+	}
 }

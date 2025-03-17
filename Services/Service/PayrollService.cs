@@ -1,4 +1,8 @@
-﻿using System;
+﻿using BusinessObjects.Models;
+using DataAssetObjects;
+using Repositories.Interface;
+using Services.InterfaceServie;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,6 +29,9 @@ namespace Services.Service
         public Payroll GetPayrollByMonthAndYear(int employeeId, int month, int year) => payrollRepository.GetPayrollByMonthAndYear(employeeId, month, year);
         public Payroll GetPayrollByID(int id) => payrollRepository.GetPayrollByID(id);
         public void UpdatePayroll(Payroll payroll) => payrollRepository.Update(payroll);
+        public List<Payroll> GetAll() => payrollRepository.GetAll();
+
+		public Payroll GetById(int id) => payrollRepository.GetById(id);
 
     }
 }

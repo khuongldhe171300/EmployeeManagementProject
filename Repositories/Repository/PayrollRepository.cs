@@ -26,5 +26,7 @@ namespace Repositories.Repository
         public Payroll GetPayrollByMonthAndYear(int employeeId, int month, int year) => payrollDAO.GetPayrollByMonthAndYear(employeeId, month, year);
         public Payroll GetPayrollByID(int id) => payrollDAO.GetPayrollByID(id);
         public void Update(Payroll payroll) => payrollDAO.Update(payroll);
+		public List<Payroll> GetAll() => payrollDAO.GetAll();
+		public Payroll GetById(int id) => payrollDAO.GetById(id);
     }
 }

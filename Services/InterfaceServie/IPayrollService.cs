@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,5 +18,7 @@ namespace Services.InterfaceServie
         void UpdatePayroll(Payroll payroll);
         Payroll GetPayrollByMonthAndYear(int employeeId, int month, int year);
         Payroll GetPayrollByID(int id);
+        Payroll GetById(int id);
+		List<Payroll> GetAll();
     }
 }
