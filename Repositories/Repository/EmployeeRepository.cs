@@ -27,9 +27,9 @@ namespace Repositories.Repository
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<Employee>> GetAll()
+        public async Task<IEnumerable<Employee>> GetAll()
         {
-            throw new NotImplementedException();
+           return await employeeDAO.GetAll();   
         }
 
         public Task<Employee> GetById(int id)

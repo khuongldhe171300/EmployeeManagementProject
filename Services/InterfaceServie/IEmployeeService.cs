@@ -17,5 +17,7 @@ namespace Services.InterfaceServie
         List<DepartmentReport> GetEmployeeCountByDepartment();
 		List<PositionReport> GetEmployeeCountByPosition();
 		List<GenderReport> GetEmployeeCountByGender();
+
+        Task<IEnumerable<Employee>> GetAll();
     }
 }
