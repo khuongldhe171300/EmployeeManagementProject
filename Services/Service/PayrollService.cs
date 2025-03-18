@@ -25,10 +25,6 @@ namespace Services.Service
         public int GetTotalWorkingHours(int employeeId, int month, int year) => payrollRepository.GetTotalWorkingHours(employeeId, month, year);
         public int GetTotalOutTime(int employeeId, int month, int year) => payrollRepository.GetTotalOutTime(employeeId, month, year);
         public int GetTotalSalary(int employeeId, int month, int year) => payrollRepository.GetTotalSalary(employeeId, month, year);
-        public void AddPayroll(Payroll payroll) => payrollRepository.AddPayroll(payroll);
-        public Payroll GetPayrollByMonthAndYear(int employeeId, int month, int year) => payrollRepository.GetPayrollByMonthAndYear(employeeId, month, year);
-        public Payroll GetPayrollByID(int id) => payrollRepository.GetPayrollByID(id);
-        public void UpdatePayroll(Payroll payroll) => payrollRepository.Update(payroll);
         public List<Payroll> GetAll() => payrollRepository.GetAll();
 
 		public Payroll GetById(int id) => payrollRepository.GetById(id);

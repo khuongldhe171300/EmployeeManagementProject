@@ -16,20 +16,6 @@ namespace DataAssetObjects
             this.context = context;
             employeeDAO = new EmployeeDAO(context);
         }
-        public void Add(Payroll payroll)
-        {
-            context.Add(payroll);
-            context.SaveChanges();
-        }
-        public void Update(Payroll payroll)
-        {
-            context.Update(payroll);
-            context.SaveChanges();
-        }
-        public Payroll GetPayrollByID(int id)
-        {
-            return context.Payrolls.FirstOrDefault(p => p.PayrollId == id);
-        }
         public List<Payroll> GetPayrollByEmp(int employeeId)
         {
             return context.Payrolls.Where(p => p.EmployeeId == employeeId).ToList();
@@ -37,10 +23,6 @@ namespace DataAssetObjects
         public List<Payroll> GetPayrollByMonth(int employeeId, int month, int year)
         {
             return context.Payrolls.Where(p => p.EmployeeId == employeeId && p.PaymentDate.Value.Month == month && p.PaymentDate.Value.Year == year).ToList();
-        }
-        public Payroll GetPayrollByMonthAndYear(int employeeId, int month, int year)
-        {
-            return context.Payrolls.FirstOrDefault(p => p.EmployeeId == employeeId && p.PaymentDate.Value.Month == month && p.PaymentDate.Value.Year == year);
         }
         public int GetTotalWorkingHours(int employeeId, int month, int year)
         {

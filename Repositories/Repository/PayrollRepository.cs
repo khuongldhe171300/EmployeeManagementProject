@@ -22,10 +22,6 @@ namespace Repositories.Repository
         public int GetTotalWorkingHours(int employeeId, int month, int year) => payrollDAO.GetTotalWorkingHours(employeeId, month, year);
         public int GetTotalOutTime(int employeeId, int month, int year) => payrollDAO.GetTotalOutTime(employeeId, month, year);
         public int GetTotalSalary(int employeeId, int month, int year) => payrollDAO.GetTotalSalary(employeeId, month, year);
-        public void AddPayroll(Payroll payroll) => payrollDAO.Add(payroll);
-        public Payroll GetPayrollByMonthAndYear(int employeeId, int month, int year) => payrollDAO.GetPayrollByMonthAndYear(employeeId, month, year);
-        public Payroll GetPayrollByID(int id) => payrollDAO.GetPayrollByID(id);
-        public void Update(Payroll payroll) => payrollDAO.Update(payroll);
 		public List<Payroll> GetAll() => payrollDAO.GetAll();
 		public Payroll GetById(int id) => payrollDAO.GetById(id);
     }

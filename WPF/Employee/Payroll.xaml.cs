@@ -37,7 +37,7 @@ namespace WPF.Employee
             PayrollRepository payrollRepository = new PayrollRepository(payrollDAO);
             payrollService = new PayrollService(payrollRepository);
             employeeService = new EmployeeService(new EmployeeRepository(new EmployeeDAO(context)));
-            cbMonth.SelectedIndex = DateTime.Now.Month -1;
+            cbMonth.SelectedIndex = DateTime.Now.Month - 1;
             txtYear.Text = DateTime.Now.Year.ToString();
             EmpID = emp.EmployeeId;
             LoadDefaultData();

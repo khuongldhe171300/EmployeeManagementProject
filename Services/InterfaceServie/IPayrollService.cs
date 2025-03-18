@@ -14,10 +14,6 @@ namespace Services.InterfaceServie
         int GetTotalWorkingHours(int employeeId, int month, int year);
         int GetTotalOutTime(int employeeId, int month, int year);
         int GetTotalSalary(int employeeId, int month, int year);
-        void AddPayroll(Payroll payroll);
-        void UpdatePayroll(Payroll payroll);
-        Payroll GetPayrollByMonthAndYear(int employeeId, int month, int year);
-        Payroll GetPayrollByID(int id);
         Payroll GetById(int id);
 		List<Payroll> GetAll();
     }

@@ -17,7 +17,6 @@ using DataAssetObjects;
 using Repositories.Repository;
 using Services.Service;
 using System.Globalization;
-using WPF.Admin;
 
 
 namespace WPF.Employee
@@ -122,14 +121,6 @@ namespace WPF.Employee
             var employee = employeeService.GetEmployeeByID(employeeId);
             Payroll payroll = new Payroll(employee);
             payroll.Show();
-            this.Close();
-        }
-
-        private void btnPay_Click(object sender, RoutedEventArgs e)
-        {
-            var employee = employeeService.GetEmployeeByID(employeeId);
-            PayrollManager payrollManager = new PayrollManager(employee);
-            payrollManager.Show();
             this.Close();
         }
     }
