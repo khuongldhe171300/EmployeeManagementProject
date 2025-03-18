@@ -4,7 +4,31 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPF"
-               mc:Ignorable="d"
+        mc:Ignorable="d"
+        Title="EmployeeDashboard" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Background="OrangeRed" Orientation="Horizontal">
+            <Label Content="Employee Dashboard" Margin="10" FontWeight="Bold" FontSize="16" Foreground="White" />
+            <StackPanel Orientation="Horizontal" Height="30" Width="auto">
+                <Button Content="Chấm công" Width="120" Margin="0 0 10 0"/>
+                <Button Content="Báo cáo nhân công" Width="120" Margin="0 0 10 0" Click="ReportEmployee_Click"/>
+                <Button Content="Báo cáo lương thưởng" Width="130" Margin="0 0 10 0"/>
+                <Button Content="Profile" Width="120" Margin="0 0 10 0"/>
+                <Button Content="Đăng xuất" Width="120" Margin="0 0 10 0"/>
+            </StackPanel>
+        </StackPanel>
+        <GroupBox Grid.Row="1" Margin="10" BorderThickness="3" BorderBrush="Black" Padding="5">
+            <ContentControl Content="{Binding CurrentView}"/>
+        </GroupBox>
+    </Grid>
+</Window>
+
+           <!-- mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
                 Title="Employee Dashboard" Height="600" Width="1000" Background="#eef1f5">
 
@@ -63,5 +87,4 @@
             <Setter Property="Background" Value="#D84315"/>
         </Style>
     </Window.Resources>
-</Window>
-
+</Window> -->
