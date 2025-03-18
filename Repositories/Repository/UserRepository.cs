@@ -65,25 +65,6 @@ namespace Repositories.Repository
         {
             throw new NotImplementedException();
         }
-        public User GetUserByUserNameAndPassword(string userName, string password)
-        {
-            using (HrmanagementContext _context = new HrmanagementContext())
-            {
-                var user = _context.Users.FirstOrDefault(u => u.Username == userName && u.PasswordHash == password);
-
-                if (user == null)
-                {
-                    throw new KeyNotFoundException("Không tìm thấy thông tin người dùng");
-                }
-
-                if (!user.IsActive)
-                {
-                    throw new UnauthorizedAccessException("Tài khoản không có quyền truy cập");
-                }
-
-                return user;
-            }
-
-        }
+        
     }
 }

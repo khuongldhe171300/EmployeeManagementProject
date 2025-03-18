@@ -1,97 +1,72 @@
-﻿using System;
-using System.ComponentModel;
+﻿using BusinessObjects.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
+using WPF.Employee;
 
 namespace WPF
 {
-    public partial class EmployeeDashboard : Window, INotifyPropertyChanged
+    /// <summary>
+    /// Interaction logic for EmployeeDashboard.xaml
+    /// </summary>
+    public partial class EmployeeDashboard : Window
     {
-        private object _currentView;
+        private int employeeId;
 
-        public EmployeeDashboard()
+        public EmployeeDashboard(int employeeId)
         {
             InitializeComponent();
-
-            this.DataContext = this;
-
-            CurrentView = null;
+            this.employeeId = employeeId;
         }
 
-        public object CurrentView
+        private void Logout_Click(object sender, RoutedEventArgs e)
         {
-            get { return _currentView; }
-            set
-            {
-                _currentView = value;
-                OnPropertyChanged(nameof(CurrentView));
-            }
+            //MainWindow mainWindow = new MainWindow();
+            //mainWindow.Show();
+            //this.Close(); // Đóng cửa sổ hiện tại, quay về màn hình trước
+        }
+
+        private void ChamCong_Click(object sender, RoutedEventArgs e)
+        {
+            //ChamCong chamCong = new ChamCong(employeeId);
+            //chamCong.Show();
+            //this.Close();
+        }
+
+        private void BaoCaoChamCong_Click(object sender, RoutedEventArgs e)
+        {
+            //BaoCaoChamCong BaoCaoChamCong = new BaoCaoChamCong(employeeId);
+            //BaoCaoChamCong.Show();
+            //this.Close();
+        }
+
+        private void BaoCaoLuong_Click(object sender, RoutedEventArgs e)
+        {
+            //BaoCaoLuongNhanVien baoCaoLuongNhanVien = new BaoCaoLuongNhanVien(employeeId);
+            //baoCaoLuongNhanVien.Show();
+            //this.Close(); // Đóng cửa sổ hiện tại, quay về màn hình trước
+        }
+
+        private void Profile_Click(object sender, RoutedEventArgs e)
+        {
+
+            //new EmployeeProfile(employeeId).Show();
+            //this.Close();
         }
 
         private void ReportEmployee_Click(object sender, RoutedEventArgs e)
         {
-            CurrentView = new EmployeeManager();
-        }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }
-
-// using System.Collections.Generic;
-// using System.Linq;
-// using System.Text;
-// using System.Threading.Tasks;
-// using System.Windows;
-// using System.Windows.Controls;
-// using System.Windows.Data;
-// using System.Windows.Documents;
-// using System.Windows.Input;
-// using System.Windows.Media;
-// using System.Windows.Media.Imaging;
-// using System.Windows.Shapes;
-
-// namespace WPF
-// {
-//     /// <summary>
-//     /// Interaction logic for EmployeeDashboard.xaml
-//     /// </summary>
-//     public partial class EmployeeDashboard : Window
-//     {
-//         public EmployeeDashboard()
-//         {
-//             InitializeComponent();
-//         }
-
-//         private void Logout_Click(object sender, RoutedEventArgs e)
-//         {
-//             this.Close(); // Đóng cửa sổ hiện tại, quay về màn hình trước
-//         }
-
-//         private void ChamCong_Click(object sender, RoutedEventArgs e)
-//         {
-//             ChamCong  chamCong = new ChamCong();
-//             chamCong.Show();
-//             this.Close();
-//         }
-
-//         private void BaoCaoChamCong_Click(object sender, RoutedEventArgs e)
-//         {
-//             BaoCaoChamCong BaoCaoChamCong = new BaoCaoChamCong();
-//             BaoCaoChamCong.Show();
-//             this.Close();
-//         }
-
-//         private void BaoCaoLuong_Click(object sender, RoutedEventArgs e)
-//         {
-//             BaoCaoLuongNhanVien baoCaoLuongNhanVien = new BaoCaoLuongNhanVien();
-//             baoCaoLuongNhanVien.Show();
-//             this.Close(); // Đóng cửa sổ hiện tại, quay về màn hình trước
-//         }
-
-//         private void Profile_Click(object sender, RoutedEventArgs e)
-//         {
-//             this.Close(); // Đóng cửa sổ hiện tại, quay về màn hình trước

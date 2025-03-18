@@ -62,7 +62,7 @@ namespace WPF
                 //thêm ở dây là trở về màn hình AdminDashboard
 
             }
-			EmployeeDashboard employeeDashboard = new EmployeeDashboard();
+			EmployeeDashboard employeeDashboard = new EmployeeDashboard(employeeId);
 			employeeDashboard.Show();
 			this.Close(); // Đóng cửa sổ hiện tại, quay về màn hình trước
 		}

@@ -1,4 +1,5 @@
 ﻿using BusinessObjects.Models;
+using DataAssetObjects;
 using Microsoft.Win32;
 using Repositories.Interface;
 using Repositories.Repository;
@@ -19,15 +20,21 @@ namespace WPF
         private readonly IEmployeeRepository _employee;
         private readonly IDepartmentRepository _department;
         private readonly IPositionRepository _position;
+        private readonly HrmanagementContext _context;
 
-        public List<Employee> Employees { get; set; }
+        public List<BusinessObjects.Models.Employee> Employees { get; set; }
         public List<Department> Departments { get; set; }
         public List<Position> Positions { get; set; }
 
+
+
         public EmployeeManager()
         {
-            _employee = new EmployeeRepository();
-            _department = new DepartmentReporsitory();
+
+            var employeeDAO = new EmployeeDAO(_context);
+            var departmentDAO = new DepartmentDAO(_context);
+            _employee = new EmployeeRepository(employeeDAO);
+            _department = new DepartmentRepository(departmentDAO);
             _position = new PositionRepository();
             InitializeComponent();
             LoadData();
@@ -37,7 +44,7 @@ namespace WPF
         {
             if (sender is ListView listView)
             {
-                Employee employee = listView.SelectedItem as Employee;
+                BusinessObjects.Models.Employee employee = listView.SelectedItem as BusinessObjects.Models.Employee;
                 if (employee != null)
                 {
                     tbId.Text = employee.EmployeeId.ToString();
@@ -77,7 +84,7 @@ namespace WPF
             else
             {
 
-                Employee employee = GetEmployee();
+                BusinessObjects.Models.Employee employee = GetEmployee();
                 string password = pbPassword.Password;
                 string username = tbUsername.Text;
 
@@ -123,7 +130,7 @@ namespace WPF
 
         private void btnUpdate_Click(object sender, RoutedEventArgs e)
         {
-            Employee employee = GetEmployee();
+            BusinessObjects.Models.Employee employee = GetEmployee();
             employee.EmployeeId = int.Parse(tbId.Text);
             string filePath = (imgAvt.Source as BitmapImage)?.UriSource?.LocalPath;
 
@@ -171,9 +178,9 @@ namespace WPF
             }
         }
 
-        private Employee GetEmployee()
+        private BusinessObjects.Models.Employee GetEmployee()
         {
-            Employee employee = new Employee
+            BusinessObjects.Models.Employee employee = new BusinessObjects.Models.Employee
             {
                 EmployeeCode = GenerateEmployeeCode(),
                 FullName = tbName.Text,
