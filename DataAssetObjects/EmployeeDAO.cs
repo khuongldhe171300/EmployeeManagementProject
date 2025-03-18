@@ -133,7 +133,6 @@ namespace DataAssetObjects
             return await _context.Employees.Include(e => e.Position).Include(e => e.Department).ToListAsync();
         }
 
-
     }
 
     public class DepartmentReport

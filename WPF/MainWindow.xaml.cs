@@ -42,15 +42,7 @@ namespace WPF
                     switch (user.UserRole)
                     {
                         case "Admin":
-<<<<<<< HEAD
-<<<<<<< HEAD
                             new EmployeeDashboard(user.EmployeeId).Show();
-=======
-                            new EmployeeManager().Show();
->>>>>>> parent of 965024e (Connect flow of role Admin)
-=======
-                            new EmployeeManager().Show();
->>>>>>> parent of 965024e (Connect flow of role Admin)
                             this.Close();
                             break;
                         case "User":

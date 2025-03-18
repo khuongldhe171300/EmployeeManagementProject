@@ -3,12 +3,10 @@ using DataAssetObjects;
 using Microsoft.Win32;
 using Repositories.Interface;
 using Repositories.Repository;
-using System.Net;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
-using System.Xml.Linq;
 
 namespace WPF
 {
@@ -196,7 +194,7 @@ namespace WPF
             Employees = _employee.GetEmployees();
             Departments = _department.GetDepartments();
             Positions = _position.GetPositions();
-            lvEmployees.ItemsSource = Employees;
+            //lvEmployees.ItemsSource = Employees;
             cbDepartment.ItemsSource = Departments;
             cbPosition.ItemsSource = Positions;
         }
