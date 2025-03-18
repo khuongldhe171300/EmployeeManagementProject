@@ -43,9 +43,12 @@ namespace WPF
                     switch (user.UserRole)
                     {
                         case "Admin":
-                            
+                            new EmployeeDashboard().Show();
+                            this.Close();
                             break;
                         case "User":
+                            break;
+                        case "Employee":
                             new EmployeeProfile(user).Show();
                             this.Close();
                             break;
