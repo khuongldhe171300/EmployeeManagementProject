@@ -21,7 +21,7 @@ namespace Repositories.Repository
 
         public Task Add(LeaveRequest entity)
         {
-            throw new NotImplementedException();
+           return leaveRequestDAO.Add(entity);
         }
 
         public Task Delete(int id)
@@ -29,9 +29,9 @@ namespace Repositories.Repository
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<LeaveRequest>> GetAll()
+        public async Task<IEnumerable<LeaveRequest>> GetAll()
         {
-            throw new NotImplementedException();
+           return await leaveRequestDAO.GetAll();
         }
 
         public Task<LeaveRequest> GetById(int id)
@@ -43,7 +43,12 @@ namespace Repositories.Repository
 
         public Task Update(LeaveRequest entity)
         {
-            throw new NotImplementedException();
+            return leaveRequestDAO.Update(entity);
         }
+
+        public Task<IEnumerable<LeaveRequest>> GetLeaveRequestsByEmployeeId(int id) => leaveRequestDAO.GetLeaveRequestsByEmployeeId(id);
+
+        public Task<IEnumerable<LeaveRequest>> SearchByEmployeeName(string employeeName) => leaveRequestDAO.SearchByEmployeeName(employeeName);
+        
     }
 }

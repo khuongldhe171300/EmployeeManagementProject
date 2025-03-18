@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Security.Cryptography;
+using BusinessObjects.Models;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;  // Cần thư viện này để lấy connection string từ DbContext
 
@@ -10,12 +12,14 @@ namespace DataAssetObjects
     public class LeaveRequestDAO
     {
         private readonly string _connectionString;
+        private readonly HrmanagementContext _context;
 
         public LeaveRequestDAO(HrmanagementContext context)
         {
             _connectionString = context.Database.GetDbConnection().ConnectionString;
+            _context = context;
         }
-
+        
         public List<LeaveSummary> GetLeaveSummary(int? employeeId, int month, int year)
         {
             List<LeaveSummary> leaveSummaries = new List<LeaveSummary>();
@@ -91,6 +95,41 @@ namespace DataAssetObjects
                 }
             }
             return leaveSummaries;
+        }
+
+        public async Task<IEnumerable<LeaveRequest>> GetAll()
+        {
+            return await _context.LeaveRequests
+                .Include(l => l.Employee)
+                .ToListAsync();
+        }
+
+        public async Task Add(LeaveRequest entity)
+        {
+            _context.LeaveRequests.Add(entity);
+            await _context.SaveChangesAsync();
+        }
+
+
+        public async Task<IEnumerable<LeaveRequest>> GetLeaveRequestsByEmployeeId(int employeeId)
+        {
+            return await _context.LeaveRequests
+                .Include(l => l.Employee)
+                .Where(l => l.EmployeeId == employeeId)
+                .ToListAsync();
+        }
+
+        public async Task Update(LeaveRequest entity)
+        {
+            _context.LeaveRequests.Update(entity);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task<IEnumerable<LeaveRequest>> SearchByEmployeeName(string employeeName)
+        {
+            return await _context.LeaveRequests
+                .Where(lr => lr.Employee.FullName.Contains(employeeName))
+                .ToListAsync();
         }
 
 

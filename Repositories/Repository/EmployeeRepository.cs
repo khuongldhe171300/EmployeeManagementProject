@@ -19,6 +19,11 @@ namespace Repositories.Repository
             this.employeeDAO = new EmployeeDAO();
         }
 
+        public EmployeeRepository(EmployeeDAO employeeDAO)
+        {
+            this.employeeDAO = employeeDAO;
+        }
+
         public Task Add(Employee entity)
         {
             throw new NotImplementedException();
@@ -39,9 +44,9 @@ namespace Repositories.Repository
             throw new NotImplementedException();
         }
 
-        public  Task<IEnumerable<Employee>> GetAll()
+        public async Task<IEnumerable<Employee>> GetAll()
         {
-            throw new NotImplementedException();
+           return await employeeDAO.GetAll();   
         }
 
         public Task<Employee> GetById(int id)
@@ -53,15 +58,22 @@ namespace Repositories.Repository
         {
             return employeeDAO.GetEmployees();
         }
+		public List<DepartmentReport> GetEmployeeCountByDepartment() => employeeDAO.GetEmployeeCountByDepartment();
 
-        public Task Update(Employee entity)
+		public List<GenderReport> GetEmployeeCountByGender() => employeeDAO.GetEmployeeCountByGender();
+
+		public List<PositionReport> GetEmployeeCountByPosition() => employeeDAO.GetEmployeeCountByPosition();
+
+		public Task Update(Employee entity)
         {
             throw new NotImplementedException();
         }
-
+        public Employee GetEmployeeByID(int id) => employeeDAO.GetEmployeeByID(id);
         public void UpdateEmployee(Employee employee)
         {
             employeeDAO.UpdateEmployeeById(employee);
         }
+        public void UpdateEmployee(Employee employee) => employeeDAO.UpdateEmployee(employee);
+        public User GetUserByEmpID(int empID) => employeeDAO.GetUserByEmpID(empID);
     }
 }
