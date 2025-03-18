@@ -17,20 +17,9 @@ namespace Repositories.Repository
         {
             this.employeeDAO = employeeDAO;
         }
-
         public Task Add(Employee entity)
         {
             throw new NotImplementedException();
-        }
-
-        public void AddEmployee(Employee employee, string password, string username)
-        {
-            employeeDAO.AddEmployee(employee, password, username);
-        }
-
-        public bool CheckEmailExisting(string email)
-        {
-           return employeeDAO.EmailExisting(email);
         }
 
         public Task Delete(int id)
@@ -61,15 +50,5 @@ namespace Repositories.Repository
         public Employee GetEmployeeByID(int id) => employeeDAO.GetEmployeeByID(id);
         public void UpdateEmployee(Employee employee) => employeeDAO.UpdateEmployee(employee);
         public User GetUserByEmpID(int empID) => employeeDAO.GetUserByEmpID(empID);
-
-         public List<Employee> GetEmployees()
-        {
-            return employeeDAO.GetEmployees();
-        }
-
-        // public void UpdateEmployee(Employee employee)
-        // {
-        //     employeeDAO.UpdateEmployeeById(employee);
-        // }
     }
 }
