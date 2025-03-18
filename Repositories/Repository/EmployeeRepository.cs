@@ -23,9 +23,9 @@ namespace Repositories.Repository
             throw new NotImplementedException();
         }
 
-        public void AddEmployee(Employee employee, string password, string username)
+        public void AddEmployee(Employee employee, string password)
         {
-            employeeDAO.AddEmployee(employee, password, username);
+            employeeDAO.AddEmployee(employee, password);
         }
 
         public bool CheckEmailExisting(string email)

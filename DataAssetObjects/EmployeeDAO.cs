@@ -33,7 +33,7 @@ namespace DataAssetObjects
                             .ToList();
         }
 
-        public void AddEmployee(Employee employee, string password, string username)
+        public void AddEmployee(Employee employee, string password)
         {
             if (employee == null) throw new ArgumentNullException(nameof(employee));
             if (string.IsNullOrWhiteSpace(password)) throw new ArgumentException("Mật khẩu không được để trống", nameof(password));
@@ -46,7 +46,7 @@ namespace DataAssetObjects
 
                     var user = new User
                     {
-                        Username = username,
+                        Username = employee.FullName,
                         Email = employee.Email,
                         PasswordHash = HashPassword(password),
                         UserRole = "User",
