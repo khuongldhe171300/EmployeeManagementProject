@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using BusinessObjects.Models;
 using Microsoft.EntityFrameworkCore;
-﻿using Microsoft.Data.SqlClient;
+using Microsoft.Data.SqlClient;
 using DataAssetObjects;
 
 namespace DataAssetObjects
@@ -33,7 +33,7 @@ namespace DataAssetObjects
                             .ToList();
         }
 
-        public void AddEmployee(Employee employee, string password)
+        public void AddEmployee(Employee employee)
         {
             _context.Employees.Add(employee);
             _context.SaveChanges();
@@ -81,79 +81,80 @@ namespace DataAssetObjects
         {
             return _context.Users.FirstOrDefault(u => u.EmployeeId == empID);
         }
-        
-		public List<DepartmentReport> GetEmployeeCountByDepartment()
-		{
-			return _context.Employees
-				.GroupBy(e => e.DepartmentId)
-				.Select(g => new DepartmentReport
-				{
-					DepartmentName = _context.Departments
-						.Where(d => d.DepartmentId == g.Key)
-						.Select(d => d.DepartmentName)
-						.FirstOrDefault() ?? "Không xác định",
-					EmployeeCount = g.Count()
-				})
-				.ToList();
-		}
 
-		public List<PositionReport> GetEmployeeCountByPosition()
-		{
-			return _context.Employees
-				.GroupBy(e => e.PositionId)
-				.Select(g => new PositionReport
-				{
-					PositionName = _context.Positions
-						.Where(p => p.PositionId == g.Key)
-						.Select(p => p.PositionName)
-						.FirstOrDefault() ?? "Không xác định",
-					EmployeeCount = g.Count()
-				})
-				.ToList();
-		}
+        public List<DepartmentReport> GetEmployeeCountByDepartment()
+        {
+            return _context.Employees
+                .GroupBy(e => e.DepartmentId)
+                .Select(g => new DepartmentReport
+                {
+                    DepartmentName = _context.Departments
+                        .Where(d => d.DepartmentId == g.Key)
+                        .Select(d => d.DepartmentName)
+                        .FirstOrDefault() ?? "Không xác định",
+                    EmployeeCount = g.Count()
+                })
+                .ToList();
+        }
 
-
-		public List<GenderReport> GetEmployeeCountByGender()
-		{
-			return _context.Employees
-				.GroupBy(e => e.Gender)
-				.Select(g => new GenderReport
-				{
-					Gender = g.Key,
-					EmployeeCount = g.Count()
-				})
-				.ToList();
-		}
+        public List<PositionReport> GetEmployeeCountByPosition()
+        {
+            return _context.Employees
+                .GroupBy(e => e.PositionId)
+                .Select(g => new PositionReport
+                {
+                    PositionName = _context.Positions
+                        .Where(p => p.PositionId == g.Key)
+                        .Select(p => p.PositionName)
+                        .FirstOrDefault() ?? "Không xác định",
+                    EmployeeCount = g.Count()
+                })
+                .ToList();
+        }
 
 
-	
+        public List<GenderReport> GetEmployeeCountByGender()
+        {
+            return _context.Employees
+                .GroupBy(e => e.Gender)
+                .Select(g => new GenderReport
+                {
+                    Gender = g.Key,
+                    EmployeeCount = g.Count()
+                })
+                .ToList();
+        }
+
+
+
 
         public async Task<IEnumerable<Employee>> GetAll()
         {
             return await _context.Employees.Include(e => e.Position).Include(e => e.Department).ToListAsync();
         }
 
-      
-	}
 
-	public class DepartmentReport
-	{
-		public string DepartmentName { get; set; }
-		public int EmployeeCount { get; set; }
-	}
+    }
 
-	public class PositionReport
-	{
-		public string PositionName { get; set; }
-		public int EmployeeCount { get; set; }
-	}
+    public class DepartmentReport
+    {
+        public string DepartmentName { get; set; }
+        public int EmployeeCount { get; set; }
+    }
 
-	public class GenderReport
-	{
-		public string Gender { get; set; }
-		public int EmployeeCount { get; set; }
-	}
+    public class PositionReport
+    {
+        public string PositionName { get; set; }
+        public int EmployeeCount { get; set; }
+    }
+
+    public class GenderReport
+    {
+        public string Gender { get; set; }
+        public int EmployeeCount { get; set; }
+    }
+
 }
-      
-        
+
+
 

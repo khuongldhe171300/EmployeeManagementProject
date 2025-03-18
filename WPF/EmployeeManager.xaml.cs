@@ -84,15 +84,13 @@ namespace WPF
             }
             else
             {
-
-<<<<<<< HEAD
                 BusinessObjects.Models.Employee employee = GetEmployee();
                 string password = pbPassword.Password;
                 string username = tbUsername.Text;
-=======
                 Employee employee = GetEmployee();
                 string filePath = (imgAvt.Source as BitmapImage)?.UriSource?.LocalPath;
->>>>>>> parent of 965024e (Connect flow of role Admin)
+                Employee employee = GetEmployee();
+                string filePath = (imgAvt.Source as BitmapImage)?.UriSource?.LocalPath;
 
                 if (!string.IsNullOrEmpty(filePath) && System.IO.File.Exists(filePath))
                 {
@@ -198,7 +196,7 @@ namespace WPF
             Employees = _employee.GetEmployees();
             Departments = _department.GetDepartments();
             Positions = _position.GetPositions();
-            //lvEmployees.ItemsSource = Employees;
+            lvEmployees.ItemsSource = Employees;
             cbDepartment.ItemsSource = Departments;
             cbPosition.ItemsSource = Positions;
         }
