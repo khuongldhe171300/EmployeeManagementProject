@@ -15,7 +15,7 @@ namespace WPF
     /// <summary>
     /// Interaction logic for EmployeeManager.xaml
     /// </summary>
-    public partial class EmployeeManager : UserControl
+    public partial class EmployeeManager : Window
     {
         private readonly IEmployeeRepository _employee;
         private readonly IDepartmentRepository _department;
@@ -57,6 +57,7 @@ namespace WPF
                     tbMail.Text = employee.Email;
                     tbphone.Text = employee.PhoneNumber;
                     tbAddress.Text = employee.Address;
+
                     cbDepartment.SelectedItem = cbDepartment.Items.Cast<Department>()
                         .FirstOrDefault(item => item.DepartmentId == employee.DepartmentId);
 
@@ -84,45 +85,41 @@ namespace WPF
             else
             {
 
+<<<<<<< HEAD
                 BusinessObjects.Models.Employee employee = GetEmployee();
                 string password = pbPassword.Password;
                 string username = tbUsername.Text;
+=======
+                Employee employee = GetEmployee();
+                string filePath = (imgAvt.Source as BitmapImage)?.UriSource?.LocalPath;
+>>>>>>> parent of 965024e (Connect flow of role Admin)
 
-                if (!string.IsNullOrEmpty(password) && !string.IsNullOrEmpty(username))
+                if (!string.IsNullOrEmpty(filePath) && System.IO.File.Exists(filePath))
                 {
-                    string filePath = (imgAvt.Source as BitmapImage)?.UriSource?.LocalPath;
+                    string savePath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resource", "avatar");
 
-                    if (!string.IsNullOrEmpty(filePath) && System.IO.File.Exists(filePath))
+                    if (!System.IO.Directory.Exists(savePath))
                     {
-                        string savePath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resource", "avatar");
-
-                        if (!System.IO.Directory.Exists(savePath))
-                        {
-                            System.IO.Directory.CreateDirectory(savePath);
-                        }
-
-                        string newFileName = Guid.NewGuid().ToString() + System.IO.Path.GetExtension(filePath);
-                        string newFilePath = System.IO.Path.Combine(savePath, newFileName);
-
-                        System.IO.File.Copy(filePath, newFilePath, true);
-
-                        employee.Avatar = System.IO.Path.Combine("Resource", "avatar", newFileName);
-
-                        imgAvt.Source = new BitmapImage(new Uri(newFilePath, UriKind.Absolute));
-                    }
-                    else
-                    {
-                        employee.Avatar = "Resource/icon/user1.png";
+                        System.IO.Directory.CreateDirectory(savePath);
                     }
 
-                    _employee.AddEmployee(employee, password);
-                    LoadData();
-                    MessageBox.Show("Thêm nhân viên thành công");
+                    string newFileName = Guid.NewGuid().ToString() + System.IO.Path.GetExtension(filePath);
+                    string newFilePath = System.IO.Path.Combine(savePath, newFileName);
+
+                    System.IO.File.Copy(filePath, newFilePath, true);
+
+                    employee.Avatar = System.IO.Path.Combine("Resource", "avatar", newFileName);
+
+                    imgAvt.Source = new BitmapImage(new Uri(newFilePath, UriKind.Absolute));
                 }
                 else
                 {
-                    MessageBox.Show("Chưa có tên đăng nhập và mật khẩu cho tài khoản của nhân viên");
+                    employee.Avatar = "Resource/icon/user1.png";
                 }
+
+                _employee.AddEmployee(employee);
+                LoadData();
+                MessageBox.Show("Thêm nhân viên thành công");
             }
         }
 
@@ -201,7 +198,7 @@ namespace WPF
             Employees = _employee.GetEmployees();
             Departments = _department.GetDepartments();
             Positions = _position.GetPositions();
-            lvEmployees.ItemsSource = Employees;
+            //lvEmployees.ItemsSource = Employees;
             cbDepartment.ItemsSource = Departments;
             cbPosition.ItemsSource = Positions;
         }

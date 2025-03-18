@@ -11,7 +11,7 @@ namespace Repositories.Interface
     public interface IEmployeeRepository : IRepository<Employee>
     {
         List<Employee> GetEmployees();
-        void AddEmployee(Employee employee, string password);
+        void AddEmployee(Employee employee);
         bool CheckEmailExisting(string email);
         Employee GetEmployeeByID(int id);
         void UpdateEmployee(Employee employee);

@@ -35,35 +35,8 @@ namespace DataAssetObjects
 
         public void AddEmployee(Employee employee, string password)
         {
-            if (employee == null) throw new ArgumentNullException(nameof(employee));
-            if (string.IsNullOrWhiteSpace(password)) throw new ArgumentException("Mật khẩu không được để trống", nameof(password));
-
-            using (var transaction = _context.Database.BeginTransaction())
-            {
-                try
-                {
-                    _context.Employees.Add(employee);
-
-                    var user = new User
-                    {
-                        Username = employee.FullName,
-                        Email = employee.Email,
-                        PasswordHash = HashPassword(password),
-                        UserRole = "User",
-                        IsActive = true,
-                        Employee = employee
-                    };
-                    _context.Users.Add(user);
-
-                    _context.SaveChanges();
-                    transaction.Commit();
-                }
-                catch (Exception)
-                {
-                    transaction.Rollback();
-                    throw;
-                }
-            }
+            _context.Employees.Add(employee);
+            _context.SaveChanges();
         }
 
         public bool EmailExisting(string mail)
