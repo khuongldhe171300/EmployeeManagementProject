@@ -18,7 +18,7 @@ namespace Services.Service
             this.employeeRepository = employeeRepository;
         }
         public Employee GetEmployeeByID(int id) => employeeRepository.GetEmployeeByID(id);
-        public void UpdateEmployee(Employee employee) => employeeRepository.UpdateEmployee(employee);
+        public void UpdateEmployee(Employee employee) => employeeRepository.UpdateEmployeeById(employee);
         public User GetUserByEmpID(int empID) => employeeRepository.GetUserByEmpID(empID);
         public List<DepartmentReport> GetEmployeeCountByDepartment() => employeeRepository.GetEmployeeCountByDepartment();
 

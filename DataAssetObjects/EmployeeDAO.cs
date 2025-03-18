@@ -14,6 +14,12 @@ namespace DataAssetObjects
     public class EmployeeDAO
     {
         private readonly HrmanagementContext _context;
+
+        public EmployeeDAO()
+        {
+            _context = new HrmanagementContext();
+        }
+
         public EmployeeDAO(HrmanagementContext context)
         {
             _context = context;

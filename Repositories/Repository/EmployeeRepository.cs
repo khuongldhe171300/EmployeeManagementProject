@@ -69,7 +69,7 @@ namespace Repositories.Repository
             throw new NotImplementedException();
         }
         public Employee GetEmployeeByID(int id) => employeeDAO.GetEmployeeByID(id);
-        public void UpdateEmployee(Employee employee)
+        public void UpdateEmployeeById(Employee employee)
         {
             employeeDAO.UpdateEmployeeById(employee);
         }

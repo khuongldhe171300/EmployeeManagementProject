@@ -24,7 +24,22 @@ namespace Repositories.Repository
             throw new NotImplementedException();
         }
 
+        public void AddDepartment(Department department)
+        {
+            throw new NotImplementedException();
+        }
+
         public Task Delete(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeleteDepartment(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeleteEmpDep(int depID)
         {
             throw new NotImplementedException();
         }
@@ -34,7 +49,17 @@ namespace Repositories.Repository
             throw new NotImplementedException();
         }
 
+        public List<Employee> GetAllEmp()
+        {
+            throw new NotImplementedException();
+        }
+
         public Task<Department> GetById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Department? GetDepartmentByID(int id)
         {
             throw new NotImplementedException();
         }
@@ -44,7 +69,27 @@ namespace Repositories.Repository
             return _departmentDAO.GetDepartments();
         }
 
+        public Department GetDepByName(string name)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Employee> GetEmpByDep(int depID)
+        {
+            throw new NotImplementedException();
+        }
+
         public Task Update(Department entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UpdateDepartment(Department department)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UpdateEmpDep(int depID, int empID)
         {
             throw new NotImplementedException();
         }

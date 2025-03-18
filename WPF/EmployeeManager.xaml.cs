@@ -2,12 +2,10 @@
 using Microsoft.Win32;
 using Repositories.Interface;
 using Repositories.Repository;
-using System.Net;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
-using System.Xml.Linq;
 
 namespace WPF
 {
@@ -20,7 +18,7 @@ namespace WPF
         private readonly IDepartmentRepository _department;
         private readonly IPositionRepository _position;
 
-        public List<Employee> Employees { get; set; }
+        public List<BusinessObjects.Models.Employee> Employees { get; set; }
         public List<Department> Departments { get; set; }
         public List<Position> Positions { get; set; }
 
@@ -37,7 +35,7 @@ namespace WPF
         {
             if (sender is ListView listView)
             {
-                Employee employee = listView.SelectedItem as Employee;
+                BusinessObjects.Models.Employee employee = listView.SelectedItem as BusinessObjects.Models.Employee;
                 if (employee != null)
                 {
                     tbId.Text = employee.EmployeeId.ToString();
@@ -77,7 +75,7 @@ namespace WPF
             else
             {
 
-                Employee employee = GetEmployee();
+                BusinessObjects.Models.Employee employee = GetEmployee();
                 string password = pbPassword.Password;
                 string username = tbUsername.Text;
 
@@ -123,7 +121,7 @@ namespace WPF
 
         private void btnUpdate_Click(object sender, RoutedEventArgs e)
         {
-            Employee employee = GetEmployee();
+            BusinessObjects.Models.Employee employee = GetEmployee();
             employee.EmployeeId = int.Parse(tbId.Text);
             string filePath = (imgAvt.Source as BitmapImage)?.UriSource?.LocalPath;
 
@@ -171,9 +169,9 @@ namespace WPF
             }
         }
 
-        private Employee GetEmployee()
+        private BusinessObjects.Models.Employee GetEmployee()
         {
-            Employee employee = new Employee
+            BusinessObjects.Models.Employee employee = new BusinessObjects.Models.Employee
             {
                 EmployeeCode = GenerateEmployeeCode(),
                 FullName = tbName.Text,
