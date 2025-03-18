@@ -11,10 +11,5 @@ namespace Repositories.Interface
     public interface ILeaveRequestRepository : IRepository<LeaveRequest>
     {
         List<LeaveSummary> GetLeaveSummary(int employeeId, int month, int year);
-        Task<IEnumerable<LeaveRequest>> GetLeaveRequestsByEmployeeId(int id);
-        Task<IEnumerable<LeaveRequest>> SearchByEmployeeName(string employeeName);
-
-
-
     }
 }

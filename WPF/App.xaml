@@ -2,7 +2,14 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:WPF"
+<<<<<<< HEAD
+             StartupUri="BaoCaoLuongNhanVien.xaml">
+    <Application.Resources>
+         
+    </Application.Resources>
+=======
              StartupUri="Admin/ManagerOnLeave.xaml">
     
 
+>>>>>>> parent of 1d3e0b5 (Merge pull request #2 from khuongldhe171300/Hanh)
 </Application>

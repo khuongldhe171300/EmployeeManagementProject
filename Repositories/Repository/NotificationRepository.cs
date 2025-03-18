@@ -12,14 +12,14 @@ namespace Repositories.Repository
     public class NotificationRepository : INotificationRepository
     {
 
-        private readonly NotificationDAO _notificationDAO;
-        public NotificationRepository(NotificationDAO notificationDAO)
+        private readonly HrmanagementContext _context;
+        public NotificationRepository(HrmanagementContext context)
         {
-            _notificationDAO = notificationDAO;
+            _context = context;
         }
         public Task Add(Notification entity)
         {
-            return _notificationDAO.Add(entity);
+            throw new NotImplementedException();
         }
 
         public Task Delete(int id)
