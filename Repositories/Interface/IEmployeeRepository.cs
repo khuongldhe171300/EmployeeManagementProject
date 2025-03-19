@@ -19,6 +19,8 @@ namespace Repositories.Interface
         List<Employee> GetEmployees();
         void AddEmployee(Employee employee, string password);
         bool CheckEmailExisting(string email);
+
+        void DeleteEmployee(int employeeId);
 	}
 }
 

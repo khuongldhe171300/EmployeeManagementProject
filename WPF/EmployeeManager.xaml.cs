@@ -2,8 +2,10 @@
 using Microsoft.Win32;
 using Repositories.Interface;
 using Repositories.Repository;
+using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 
@@ -150,6 +152,17 @@ namespace WPF
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
+            int employeeId;
+            if (int.TryParse(tbId.Text, out employeeId))
+            {
+                _employee.DeleteEmployee(employeeId);
+                LoadData();
+                MessageBox.Show("Xoá nhân viên thành công");
+            }
+            else
+            {
+                MessageBox.Show("Chưa chọn nhân viên để xoá!");
+            }
 
         }
 
@@ -201,6 +214,5 @@ namespace WPF
         {
             return $"EMP{Guid.NewGuid().ToString("N").Substring(0, 6)}";
         }
-
     }
 }
