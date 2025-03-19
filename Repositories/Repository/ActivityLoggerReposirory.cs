@@ -1,0 +1,24 @@
+﻿using DataAssetObjects;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Repositories.Repository
+{
+    public class ActivityLoggerReposirory
+    {
+
+        private readonly ActivityLoggerDAO _activityLogger;
+        public ActivityLoggerReposirory(ActivityLoggerDAO activityLogger)
+        {
+            _activityLogger = activityLogger;
+        }
+
+        public void LogActivity(int userId, string action, string actionDetails, string? ipAddress = null)
+        {
+            _activityLogger.LogActivity(userId, action, actionDetails, ipAddress);
+        }
+    }
+}
