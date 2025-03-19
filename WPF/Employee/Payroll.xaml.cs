@@ -117,8 +117,7 @@ namespace WPF.Employee
 
         private void btnBack_Click(object sender, RoutedEventArgs e)
         {
-            var user = employeeService.GetUserByEmpID(EmpID);
-            EmployeeProfile employeeProfile = new EmployeeProfile(user);
+            EmployeeProfile employeeProfile = new EmployeeProfile(EmpID);
             employeeProfile.Show();
             this.Close();
         }

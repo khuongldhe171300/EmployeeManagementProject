@@ -18,6 +18,7 @@ using Repositories.Repository;
 using Services.Service;
 using System.Globalization;
 using WPF.Admin;
+using Org.BouncyCastle.Ocsp;
 
 
 namespace WPF.Employee
@@ -29,14 +30,14 @@ namespace WPF.Employee
     {
         private readonly EmployeeService employeeService;
         int employeeId = 0;
-        public EmployeeProfile(User LoginedUser)
+        public EmployeeProfile(int empID)
         {
             InitializeComponent();
             var context = new HrmanagementContext();
             var employeeDao = new EmployeeDAO(context);
             var employeeRepository = new EmployeeRepository(employeeDao);
             employeeService = new EmployeeService(employeeRepository);
-            employeeId = LoginedUser.EmployeeId;
+            employeeId = empID;
             loadData();
         }
         private void loadData()
@@ -133,4 +134,11 @@ namespace WPF.Employee
             this.Close();
         }
     }
+		private void BackBtn_Click(object sender, RoutedEventArgs e)
+		{
+			EmployeeDashboard_Huy employeeDashboard = new EmployeeDashboard_Huy(employeeId);
+			employeeDashboard.Show();
+			this.Close(); // Đóng cửa sổ hiện tại, quay về màn hình trước
+		}
+	}
 }

@@ -28,26 +28,27 @@ namespace WPF
     {
         private readonly ILeaveRequestService _leaveRequestService;
         public ObservableCollection<LeaveSummary> leaveSummaryList { get; set; } = new ObservableCollection<LeaveSummary>();
+        private int empID;
 
-        public BaoCaoChamCong()
+        public BaoCaoChamCong(int empID)
         {
             var _context = new HrmanagementContext();
             var leaveRequestDAO = new LeaveRequestDAO(_context);
             var leaveRequestRepo = new LeaveRequestRepository(leaveRequestDAO);
             _leaveRequestService = new LeaveRequestService(leaveRequestRepo);
+            this.empID = empID;
             InitializeComponent();
         }
 
         private void GenerateReport_Click(object sender, RoutedEventArgs e)
         {
-            int employeeId = 2;
 
             // Lấy giá trị tháng từ ComboBox
             int month = int.Parse((MonthComboBox.SelectedItem as ComboBoxItem)?.Content.ToString() ?? "0");
             int year = int.Parse(YearTextBox.Text);
 
             // Xác định tham số employeeId để truyền vào GetLeaveSummary
-            int queryEmployeeId = (employeeId == 1) ? -1 : employeeId;
+            int queryEmployeeId = (empID == 1) ? -1 : empID;
 
             var leaveSummaryList = _leaveRequestService.GetLeaveSummary(queryEmployeeId, month, year);
             ReportDataGrid.ItemsSource = leaveSummaryList;
@@ -56,15 +57,17 @@ namespace WPF
 
         private void Back_Click(object sender, RoutedEventArgs e)
         {
-			int employeeId = 2;
-            if (employeeId == 1)
+	
+            if (empID == 1)
             {
                 //thêm ở dây là trở về màn hình AdminDashboard
 
-            }
-			EmployeeDashboard employeeDashboard = new EmployeeDashboard();
-			employeeDashboard.Show();
-			this.Close(); // Đóng cửa sổ hiện tại, quay về màn hình trước
+            } else
+            {
+				EmployeeDashboard_Huy employeeDashboard = new EmployeeDashboard_Huy(empID);
+				employeeDashboard.Show();
+				this.Close(); // Đóng cửa sổ hiện tại, quay về màn hình trước
+			}
 		}
     }
 }
