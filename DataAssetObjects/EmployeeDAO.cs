@@ -9,11 +9,19 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using DataAssetObjects;
+using Microsoft.Extensions.Logging;
 namespace DataAssetObjects
 {
     public class EmployeeDAO
     {
         private readonly HrmanagementContext _context;
+
+
+        public EmployeeDAO()
+        {
+            _context = new HrmanagementContext();
+        }
+
         public EmployeeDAO(HrmanagementContext context)
         {
             _context = context;
@@ -83,6 +91,95 @@ namespace DataAssetObjects
         }
 
       
+              public List<Employee> GetEmployees()
+        {
+            return _context.Employees
+                            .Include(e => e.Department)
+                            .Include(e => e.Position)
+                            .ToList();
+        }
+        public void AddEmployee(Employee employee, string password)
+        {
+            if (employee == null) throw new ArgumentNullException(nameof(employee));
+            if (string.IsNullOrWhiteSpace(password)) throw new ArgumentException("Mật khẩu không được để trống", nameof(password));
+
+            using (var transaction = _context.Database.BeginTransaction())
+            {
+                try
+                {
+                    // Kiểm tra username trước khi thêm nhân viên
+                    if (_context.Users.Any(u => u.Username == employee.FullName))
+                    {
+                        throw new InvalidOperationException("Username đã tồn tại.");
+                    }
+
+                    // Thêm nhân viên
+                    _context.Employees.Add(employee);
+
+                    // Thêm tài khoản người dùng liên kết với nhân viên
+                    var user = new User
+                    {
+                        Username = employee.FullName,
+                        Email = employee.Email,
+                        PasswordHash = HashPassword(password),
+                        UserRole = "User",
+                        IsActive = true,
+                        Employee = employee
+                    };
+                    _context.Users.Add(user);
+
+                   
+
+                    // Lưu thay đổi
+                    _context.SaveChanges();
+                    transaction.Commit();
+                    // Ghi log trước khi commit giao dịch
+                    
+                }
+                catch (InvalidOperationException ex)
+                {
+                    transaction.Rollback();
+                    throw new Exception($"Lỗi dữ liệu: {ex.Message}", ex);
+                }
+                catch (Exception ex)
+                {
+                    transaction.Rollback();
+                    throw new Exception("Có lỗi xảy ra khi thêm nhân viên.", ex);
+                }
+            }
+        }
+
+        public bool EmailExisting(string mail)
+        {
+            var employee = _context.Employees.FirstOrDefault(e => e.Email.Equals(mail));
+            if (employee == null) return false;
+            return true;
+        }
+
+        public void UpdateEmployeeById(Employee employee)
+        {
+            var employeeExisting = _context.Employees.FirstOrDefault(e => e.EmployeeId == employee.EmployeeId);
+            if (employeeExisting == null) throw new Exception("Nhân viên không tồn tại");
+            employeeExisting.EmployeeId = employee.EmployeeId;
+            employeeExisting.FullName = employee.FullName;
+            employeeExisting.DateOfBirth = employee.DateOfBirth;
+            employeeExisting.Gender = employee.Gender;
+            employeeExisting.Email = employee.Email;
+            employeeExisting.PhoneNumber = employee.PhoneNumber;
+            employeeExisting.Address = employee.Address;
+            employeeExisting.Avatar = employee.Avatar;
+            employeeExisting.DepartmentId = employee.DepartmentId;
+            employeeExisting.StartDate = employee.StartDate;
+            employeeExisting.PositionId = employee.PositionId;
+            _context.Employees.Update(employeeExisting);
+            _context.SaveChanges();
+        }
+
+
+        private static string HashPassword(string password)
+        {
+            return BCrypt.Net.BCrypt.HashPassword(password);
+        }
 	}
 
 	public class DepartmentReport

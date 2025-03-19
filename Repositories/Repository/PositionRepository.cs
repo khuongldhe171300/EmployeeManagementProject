@@ -11,10 +11,10 @@ namespace Repositories.Repository
 {
     public class PositionRepository : IPositionRepository
     {
-        private readonly HrmanagementContext _context;
-        public PositionRepository(HrmanagementContext context)
+        private readonly PositionDAO _positionDAO;
+        public PositionRepository()
         {
-            _context = context;
+            _positionDAO = new PositionDAO();
         }
         public Task Add(Position entity)
         {
@@ -34,6 +34,11 @@ namespace Repositories.Repository
         public Task<Position> GetById(int id)
         {
             throw new NotImplementedException();
+        }
+
+        public List<Position> GetPositions()
+        {
+           return _positionDAO.GetPositions();
         }
 
         public Task Update(Position entity)

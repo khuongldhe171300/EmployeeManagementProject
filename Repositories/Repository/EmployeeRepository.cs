@@ -13,13 +13,30 @@ namespace Repositories.Repository
     {
 
         private readonly EmployeeDAO employeeDAO;
+
+        public EmployeeRepository()
+        {
+            this.employeeDAO = new EmployeeDAO();
+        }
+
         public EmployeeRepository(EmployeeDAO employeeDAO)
         {
             this.employeeDAO = employeeDAO;
         }
+
         public Task Add(Employee entity)
         {
             throw new NotImplementedException();
+        }
+
+        public void AddEmployee(Employee employee, string password)
+        {
+            employeeDAO.AddEmployee(employee, password);
+        }
+
+        public bool CheckEmailExisting(string email)
+        {
+           return employeeDAO.EmailExisting(email);
         }
 
         public Task Delete(int id)
@@ -37,6 +54,10 @@ namespace Repositories.Repository
             throw new NotImplementedException();
         }
 
+        public List<Employee> GetEmployees()
+        {
+            return employeeDAO.GetEmployees();
+        }
 		public List<DepartmentReport> GetEmployeeCountByDepartment() => employeeDAO.GetEmployeeCountByDepartment();
 
 		public List<GenderReport> GetEmployeeCountByGender() => employeeDAO.GetEmployeeCountByGender();
@@ -48,6 +69,10 @@ namespace Repositories.Repository
             throw new NotImplementedException();
         }
         public Employee GetEmployeeByID(int id) => employeeDAO.GetEmployeeByID(id);
+        public void UpdateEmployeeById(Employee employee)
+        {
+            employeeDAO.UpdateEmployeeById(employee);
+        }
         public void UpdateEmployee(Employee employee) => employeeDAO.UpdateEmployee(employee);
         public User GetUserByEmpID(int empID) => employeeDAO.GetUserByEmpID(empID);
     }

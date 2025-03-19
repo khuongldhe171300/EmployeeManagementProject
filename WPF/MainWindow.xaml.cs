@@ -1,5 +1,4 @@
-﻿using System.Text;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
@@ -43,7 +42,10 @@ namespace WPF
                     switch (user.UserRole)
                     {
                         case "Admin":
-                            
+                            new EmployeeDashboard().Show();
+                            this.Close();
+                            break;
+                        case "User":
                             break;
                         case "Employee":
                             new EmployeeProfile(user).Show();
