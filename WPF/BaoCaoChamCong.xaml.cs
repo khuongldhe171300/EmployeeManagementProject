@@ -64,7 +64,7 @@ namespace WPF
 
             } else
             {
-				EmployeeDashboard employeeDashboard = new EmployeeDashboard(empID);
+				EmployeeDashboard_Huy employeeDashboard = new EmployeeDashboard_Huy(empID);
 				employeeDashboard.Show();
 				this.Close(); // Đóng cửa sổ hiện tại, quay về màn hình trước
 			}

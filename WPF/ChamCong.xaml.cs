@@ -140,7 +140,7 @@ namespace WPF
 
         private void Back_Click(object sender, RoutedEventArgs e)
         {
-            EmployeeDashboard employeeDashboard = new EmployeeDashboard(currentEmployeeId);
+            EmployeeDashboard_Huy employeeDashboard = new EmployeeDashboard_Huy(currentEmployeeId);
             employeeDashboard.Show();
             this.Close(); // Đóng cửa sổ hiện tại, quay về màn hình trước
         }

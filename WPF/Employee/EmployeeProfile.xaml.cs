@@ -127,7 +127,7 @@ namespace WPF.Employee
 
 		private void BackBtn_Click(object sender, RoutedEventArgs e)
 		{
-			EmployeeDashboard employeeDashboard = new EmployeeDashboard(employeeId);
+			EmployeeDashboard_Huy employeeDashboard = new EmployeeDashboard_Huy(employeeId);
 			employeeDashboard.Show();
 			this.Close(); // Đóng cửa sổ hiện tại, quay về màn hình trước
 		}

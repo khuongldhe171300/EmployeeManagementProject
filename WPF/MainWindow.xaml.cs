@@ -46,7 +46,7 @@ namespace WPF
                             
                             break;
                         case "Employee":
-                            new EmployeeDashboard(user.EmployeeId).Show();
+                            new EmployeeDashboard_Huy(user.EmployeeId).Show();
                             this.Close();
                             break;
                         default:
