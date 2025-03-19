@@ -243,8 +243,8 @@ namespace WPF.Admin
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow mainWindow = new MainWindow();
-            mainWindow.Show();
+            EmployeeDashboard employeeDashboard = new EmployeeDashboard();
+            employeeDashboard.Show();
             this.Close();
         }
 

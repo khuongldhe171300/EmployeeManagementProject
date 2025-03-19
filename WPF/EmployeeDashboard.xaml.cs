@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
+using WPF.Admin;
 
 namespace WPF
 {
@@ -37,6 +38,20 @@ namespace WPF
         protected void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private void QuanLyPhongBan_btn_Click(object sender, RoutedEventArgs e)
+        {
+            DepManager depManager = new DepManager();
+            depManager.Show();
+            this.Close();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow main = new MainWindow();
+            main.Show();
+            this.Close();
         }
     }
 }
