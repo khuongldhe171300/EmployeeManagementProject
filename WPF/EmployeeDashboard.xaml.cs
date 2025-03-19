@@ -10,13 +10,16 @@ namespace WPF
     {
         private object _currentView;
 
-        public EmployeeDashboard()
+        private int _employeeId;
+
+        public EmployeeDashboard(int empID)
         {
             InitializeComponent();
 
             this.DataContext = this;
 
             CurrentView = null;
+            _employeeId = empID;
         }
 
         public object CurrentView
@@ -42,7 +45,7 @@ namespace WPF
 
         private void QuanLyPhongBan_btn_Click(object sender, RoutedEventArgs e)
         {
-            DepManager depManager = new DepManager();
+            DepManager depManager = new DepManager(_employeeId);
             depManager.Show();
             this.Close();
         }
@@ -53,126 +56,40 @@ namespace WPF
             main.Show();
             this.Close();
         }
+
+        private void QuanLyNghiPhep_btn_Click(object sender, RoutedEventArgs e)
+        {
+            ManagerOnLeave managerOnLeave = new ManagerOnLeave(_employeeId);
+            managerOnLeave.Show();
+            this.Close();
+        }
+
+        private void BaoCaoChamCong_btn_Click(object sender, RoutedEventArgs e)
+        {
+            BaoCaoChamCong baoCaoChamCong = new BaoCaoChamCong(_employeeId);
+            baoCaoChamCong.Show();
+            this.Close();
+        }
+
+        private void ThongKeNhanVien_btn_Click(object sender, RoutedEventArgs e)
+        {
+            BaoCaoNhanVien m1 = new BaoCaoNhanVien(_employeeId);
+            m1.Show();
+            this.Close();
+        }
+
+        private void ThongKeLuongNhanVien_btn_Click(object sender, RoutedEventArgs e)
+        {
+            BaoCaoLuongNhanVien baocao = new BaoCaoLuongNhanVien(_employeeId);
+            baocao.Show();
+            this.Close();
+        }
+
+        private void TraLuong_btn_Click(object sender, RoutedEventArgs e)
+        {
+            PayrollManager a = new PayrollManager(_employeeId);
+            a.Show();
+            this.Close();
+        }
     }
-﻿using BusinessObjects.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using WPF.Employee;
-
-namespace WPF
-{
-	/// <summary>
-	/// Interaction logic for EmployeeDashboard.xaml
-	/// </summary>
-	public partial class EmployeeDashboard : Window
-	{
-		private int employeeId;
-
-		public EmployeeDashboard(int employeeId)
-		{
-			InitializeComponent();
-			this.employeeId = employeeId;
-		}
-
-		private void Logout_Click(object sender, RoutedEventArgs e)
-		{
-			MainWindow mainWindow = new MainWindow();
-			mainWindow.Show();
-			this.Close(); // Đóng cửa sổ hiện tại, quay về màn hình trước
-		}
-
-		private void ChamCong_Click(object sender, RoutedEventArgs e)
-		{
-			ChamCong chamCong = new ChamCong(employeeId);
-			chamCong.Show();
-			this.Close();
-		}
-
-		private void BaoCaoChamCong_Click(object sender, RoutedEventArgs e)
-		{
-			BaoCaoChamCong BaoCaoChamCong = new BaoCaoChamCong(employeeId);
-			BaoCaoChamCong.Show();
-			this.Close();
-		}
-
-		private void BaoCaoLuong_Click(object sender, RoutedEventArgs e)
-		{
-			BaoCaoLuongNhanVien baoCaoLuongNhanVien = new BaoCaoLuongNhanVien(employeeId);
-			baoCaoLuongNhanVien.Show();
-			this.Close(); // Đóng cửa sổ hiện tại, quay về màn hình trước
-		}
-
-		private void Profile_Click(object sender, RoutedEventArgs e)
-		{
-
-			new EmployeeProfile(employeeId).Show();
-			this.Close();
-		}
-	}
 }
-
-// using System.Collections.Generic;
-// using System.Linq;
-// using System.Text;
-// using System.Threading.Tasks;
-// using System.Windows;
-// using System.Windows.Controls;
-// using System.Windows.Data;
-// using System.Windows.Documents;
-// using System.Windows.Input;
-// using System.Windows.Media;
-// using System.Windows.Media.Imaging;
-// using System.Windows.Shapes;
-
-// namespace WPF
-// {
-//     /// <summary>
-//     /// Interaction logic for EmployeeDashboard.xaml
-//     /// </summary>
-//     public partial class EmployeeDashboard : Window
-//     {
-//         public EmployeeDashboard()
-//         {
-//             InitializeComponent();
-//         }
-
-//         private void Logout_Click(object sender, RoutedEventArgs e)
-//         {
-//             this.Close(); // Đóng cửa sổ hiện tại, quay về màn hình trước
-//         }
-
-//         private void ChamCong_Click(object sender, RoutedEventArgs e)
-//         {
-//             ChamCong  chamCong = new ChamCong();
-//             chamCong.Show();
-//             this.Close();
-//         }
-
-//         private void BaoCaoChamCong_Click(object sender, RoutedEventArgs e)
-//         {
-//             BaoCaoChamCong BaoCaoChamCong = new BaoCaoChamCong();
-//             BaoCaoChamCong.Show();
-//             this.Close();
-//         }
-
-//         private void BaoCaoLuong_Click(object sender, RoutedEventArgs e)
-//         {
-//             BaoCaoLuongNhanVien baoCaoLuongNhanVien = new BaoCaoLuongNhanVien();
-//             baoCaoLuongNhanVien.Show();
-//             this.Close(); // Đóng cửa sổ hiện tại, quay về màn hình trước
-//         }
-
-//         private void Profile_Click(object sender, RoutedEventArgs e)
-//         {
-//             this.Close(); // Đóng cửa sổ hiện tại, quay về màn hình trước

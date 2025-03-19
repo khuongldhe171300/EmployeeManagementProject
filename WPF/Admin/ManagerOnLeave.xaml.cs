@@ -25,8 +25,9 @@ namespace WPF.Admin
 
         private readonly LeaveRequestService _leaveRequestService;
         private readonly NotificationService _notificationService;
-        
-        public ManagerOnLeave()
+        private int empID;
+
+        public ManagerOnLeave(int empID)
         {
             var _context = new HrmanagementContext();
             var leaveDAO = new LeaveRequestDAO(_context);
@@ -38,6 +39,7 @@ namespace WPF.Admin
             InitializeComponent();
 
             LoadData();
+            this.empID = empID;
         }
 
         private async void LoadData()
@@ -170,6 +172,12 @@ namespace WPF.Admin
  
             
         }
-        
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            EmployeeDashboard employee = new EmployeeDashboard(empID);
+            employee.Show();
+            this.Close();
+        }
     }
 }

@@ -208,10 +208,19 @@ namespace WPF
 
 		private void Back_Click(object sender, RoutedEventArgs e)
 		{
-			EmployeeDashboard_Huy employeeDashboard = new EmployeeDashboard_Huy(empID);
-			employeeDashboard.Show();
-			this.Close(); // Đóng cửa sổ hiện tại, quay về màn hình trước
-		}
+            if (empID == 1)
+            {
+                EmployeeDashboard employeeDashboard = new EmployeeDashboard(empID);
+                employeeDashboard.Show();
+                this.Close(); // Đóng cửa sổ hiện tại, quay về màn hình trước
+            }
+            else
+            {
+                EmployeeDashboard_Huy employeeDashboard = new EmployeeDashboard_Huy(empID);
+                employeeDashboard.Show();
+                this.Close(); // Đóng cửa sổ hiện tại, quay về màn hình trước
+            }
+        }
 	}
 }
 

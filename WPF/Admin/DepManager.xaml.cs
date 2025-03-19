@@ -24,7 +24,8 @@ namespace WPF.Admin
     public partial class DepManager : Window
     {
         private readonly DepartmentService departmentService;
-        public DepManager()
+        private int empID;
+        public DepManager(int empID)
         {
             InitializeComponent();
             var context = new HrmanagementContext();
@@ -32,6 +33,7 @@ namespace WPF.Admin
             var departmentRepository = new DepartmentRepository(departmentDAO);
             departmentService = new DepartmentService(departmentRepository);
             loadDepartments();
+            this.empID = empID;
         }
         private void loadDepartments()
         {
@@ -243,7 +245,7 @@ namespace WPF.Admin
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            EmployeeDashboard employeeDashboard = new EmployeeDashboard();
+            EmployeeDashboard employeeDashboard = new EmployeeDashboard(empID);
             employeeDashboard.Show();
             this.Close();
         }
@@ -284,7 +286,7 @@ namespace WPF.Admin
         {
             if (DepartmentListView.SelectedItem is Department seletedDepartment && seletedDepartment.DepartmentId > 0)
             {
-                EmpDepList empDepList = new EmpDepList(seletedDepartment);
+                EmpDepList empDepList = new EmpDepList(seletedDepartment, empID);
                 empDepList.Show();
                 this.Close();
             }

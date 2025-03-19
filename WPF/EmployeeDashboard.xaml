@@ -16,8 +16,14 @@
         <StackPanel Grid.Row="0" Background="OrangeRed" Orientation="Horizontal">
             <Label Content="Admin Dashboard" Margin="10" FontWeight="Bold" FontSize="16" Foreground="White" />
             <StackPanel Orientation="Horizontal" Height="30" Width="auto">
-                <Button Content="Báo cáo nhân công" Width="120" Margin="0 0 10 0" Click="ReportEmployee_Click"/>
+                <Button Content="Quản Lý Nhân Viên" Width="120" Margin="0 0 10 0" Click="ReportEmployee_Click"/>
                 <Button x:Name="QuanLyPhongBan_btn" Content="Quản Lý Phòng Ban" Width="120" Margin="0 0 10 0" Click="QuanLyPhongBan_btn_Click"/>
+                <Button x:Name="QuanLyNghiPhep_btn" Content="Quản Lý Nghỉ Phép" Width="120" Margin="0 0 10 0" Click="QuanLyNghiPhep_btn_Click" />
+                <Button x:Name="BaoCaoChamCong_btn" Content="Báo Cáo Chấm Công" Width="120" Margin="0 0 10 0" Click="BaoCaoChamCong_btn_Click" />
+                <Button x:Name="ThongKeNhanVien_btn" Content="Thống Kê Nhân Viên" Width="120" Margin="0 0 10 0" Click="ThongKeNhanVien_btn_Click"  />
+                <Button x:Name="ThongKeLuongNhanVien_btn" Content="Thống Kê Lương Nhân Viên" Width="170" Margin="0 0 10 0" Click="ThongKeLuongNhanVien_btn_Click"  />
+                <Button x:Name="TraLuong_btn" Content="Trả Lương Nhân Viên" Width="120" Margin="0 0 10 0" Click="TraLuong_btn_Click"  />
+
                 <Button Content="Đăng xuất" Width="120" Margin="0 0 10 0" Click="Button_Click"/>
             </StackPanel>
         </StackPanel>

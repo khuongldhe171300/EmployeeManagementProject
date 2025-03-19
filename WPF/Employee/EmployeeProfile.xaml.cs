@@ -129,16 +129,16 @@ namespace WPF.Employee
         private void btnPay_Click(object sender, RoutedEventArgs e)
         {
             var employee = employeeService.GetEmployeeByID(employeeId);
-            PayrollManager payrollManager = new PayrollManager(employee);
+            PayrollManager payrollManager = new PayrollManager(employee.EmployeeId);
             payrollManager.Show();
             this.Close();
         }
+
+        private void BackBtn_Click(object sender, RoutedEventArgs e)
+        {
+            EmployeeDashboard_Huy employeeDashboard = new EmployeeDashboard_Huy(employeeId);
+            employeeDashboard.Show();
+            this.Close(); // Đóng cửa sổ hiện tại, quay về màn hình trước
+        }
     }
-		private void BackBtn_Click(object sender, RoutedEventArgs e)
-		{
-			EmployeeDashboard_Huy employeeDashboard = new EmployeeDashboard_Huy(employeeId);
-			employeeDashboard.Show();
-			this.Close(); // Đóng cửa sổ hiện tại, quay về màn hình trước
-		}
-	}
 }
