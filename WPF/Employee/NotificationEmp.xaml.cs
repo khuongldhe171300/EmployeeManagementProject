@@ -25,11 +25,11 @@ namespace WPF.Employee
     public partial class NotificationEmp : Window
     {
         private readonly NotificationService notificationService;
+        private readonly HrmanagementContext context = new HrmanagementContext();
         int empID = 0;
         public NotificationEmp(int empID)
         {
             InitializeComponent();
-            var context = new HrmanagementContext();
             var notificationDao = new NotificationDAO(context);
             var notificationRepository = new NotificationRepository(notificationDao);
             notificationService = new NotificationService(notificationRepository);

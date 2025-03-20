@@ -36,8 +36,11 @@ namespace DataAssetObjects
         }
         public async Task Update(Notification notification)
         {
-            _context.Entry(notification).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
-        }
+            using (var context = new HrmanagementContext())
+            {
+                context.Entry(notification).State = EntityState.Modified;
+                await context.SaveChangesAsync();
+            }
+                        }
     }
 }

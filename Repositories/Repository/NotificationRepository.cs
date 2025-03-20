@@ -40,9 +40,9 @@ namespace Repositories.Repository
         {
             return _notificationDAO.GetById2(empID);
         }
-        public Task Update(Notification entity)
+        public async Task Update(Notification entity)
         {
-            return _notificationDAO.Update(entity);
+            await _notificationDAO.Update(entity);
         }
     }
 }
