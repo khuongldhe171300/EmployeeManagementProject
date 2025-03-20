@@ -15,6 +15,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using DataAssetObjects;
 using Services.Service;
+using WPF.Admin;
 
 
 namespace WPF
@@ -29,18 +30,20 @@ namespace WPF
         private readonly IPositionRepository _position;
         private readonly ActivityLoggerService loggerService;
         private readonly HrmanagementContext _context = new HrmanagementContext();
+        private int _employeeId;
 
         public List<BusinessObjects.Models.Employee> Employees { get; set; }
         public List<Department> Departments { get; set; }
         public List<Position> Positions { get; set; }
         int useID = 0;
 
-        public EmployeeManager()
+        public EmployeeManager(int _employeeId)
         {
             _employee = new EmployeeRepository();
             _department = new DepartmentReporsitory();
             _position = new PositionRepository();
             loggerService = new ActivityLoggerService(new ActivityLoggerReposirory(new ActivityLoggerDAO(_context)));
+            this._employeeId = _employeeId;
             InitializeComponent();
 
             LoadData();
@@ -87,6 +90,8 @@ namespace WPF
                     {
                         imgAvt.Source = new BitmapImage(new Uri(employee.Avatar, UriKind.RelativeOrAbsolute));
                     }
+
+                    _employeeId = employee.EmployeeId;
                 }
             }
         }
@@ -338,6 +343,10 @@ namespace WPF
             }
         }
 
-
+        private void btnTraLuong_Click(object sender, RoutedEventArgs e)
+        {
+            PayrollManager a = new PayrollManager(_employeeId);
+            a.Show();
+        }
     }
 }

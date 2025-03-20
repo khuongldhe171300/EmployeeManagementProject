@@ -46,17 +46,20 @@ Background="#DC3545" Foreground="White" FontWeight="Bold"
 Click="Back_Click"/>
         </StackPanel>
 
-        <!-- Bảng hiển thị báo cáo -->
-        <DataGrid Name="ReportDataGrid" Grid.Row="2" AutoGenerateColumns="False"
-                  BorderThickness="1" BorderBrush="Gray" RowBackground="White"
-                  AlternatingRowBackground="#E3E3E3">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Họ và tên" Binding="{Binding FullName}" Width="150"/>
-                <DataGridTextColumn Header="Tổng ngày đi làm" Binding="{Binding TotalWorkDays}" Width="150"/>
-                <DataGridTextColumn Header="Tổng ngày nghỉ có phép" Binding="{Binding TotalLeaveDays}" Width="150"/>
-                <DataGridTextColumn Header="Tổng ngày nghỉ không phép" Binding="{Binding TotalUnexcusedLeaveDays}" Width="170"/>
-                <DataGridTextColumn Header="Tổng giờ làm trong tháng" Binding="{Binding TotalWorkHours}" Width="150"/>
-            </DataGrid.Columns>
-        </DataGrid>
+        <!-- Bảng hiển thị báo cáo (ListView) -->
+        <ListView Name="ReportListView" Grid.Row="2" BorderThickness="1" BorderBrush="Gray"
+                  Background="White" AlternationCount="2" Margin="0,10,0,0">
+            
+
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Họ và tên" Width="150" DisplayMemberBinding="{Binding FullName}"/>
+                    <GridViewColumn Header="Tổng ngày đi làm" Width="150" DisplayMemberBinding="{Binding TotalWorkDays}"/>
+                    <GridViewColumn Header="Tổng ngày nghỉ có phép" Width="150" DisplayMemberBinding="{Binding TotalLeaveDays}"/>
+                    <GridViewColumn Header="Tổng ngày nghỉ không phép" Width="170" DisplayMemberBinding="{Binding TotalUnexcusedLeaveDays}"/>
+                    <GridViewColumn Header="Tổng giờ làm trong tháng" Width="150" DisplayMemberBinding="{Binding TotalWorkHours}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
     </Grid>
 </Window>

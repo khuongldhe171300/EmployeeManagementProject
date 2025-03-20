@@ -116,12 +116,7 @@ namespace WPF.Admin
             }
         }
 
-        private void btnBack_Click(object sender, RoutedEventArgs e)
-        {
-            EmployeeDashboard employeeDashboard = new EmployeeDashboard(EmpID);
-            employeeDashboard.Show();
-            this.Close(); // Đóng cửa sổ hiện tại, quay về màn hình trước
-        }
+        
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {

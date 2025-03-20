@@ -62,8 +62,8 @@ namespace WPF
 			}
 			DepartmentChart.Update(); // Cập nhật biểu đồ
 
-			// Thống kê nhân viên theo chức vụ (hiển thị trong bảng)
-			PositionReportGrid.ItemsSource = employeeService.GetEmployeeCountByPosition();
+            // Thống kê nhân viên theo chức vụ (hiển thị trong bảng)
+            PositionReportList.ItemsSource = employeeService.GetEmployeeCountByPosition();
 
 			// Thống kê nhân viên theo giới tính
 			var genderData = employeeService.GetEmployeeCountByGender();

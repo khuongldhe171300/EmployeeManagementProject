@@ -123,7 +123,7 @@ namespace WPF
                     AttendanceList.Add(attendance);
                 }
 
-                AttendancesList.ItemsSource = AttendanceList;
+                AttendancesListView.ItemsSource = AttendanceList;
             }
             catch (Exception ex)
             {

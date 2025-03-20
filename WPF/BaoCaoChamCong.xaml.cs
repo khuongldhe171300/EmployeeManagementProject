@@ -51,7 +51,7 @@ namespace WPF
             int queryEmployeeId = (empID == 1) ? -1 : empID;
 
             var leaveSummaryList = _leaveRequestService.GetLeaveSummary(queryEmployeeId, month, year);
-            ReportDataGrid.ItemsSource = leaveSummaryList;
+            ReportListView.ItemsSource = leaveSummaryList;
         }
 
 

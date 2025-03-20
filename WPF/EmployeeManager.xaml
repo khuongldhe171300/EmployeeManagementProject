@@ -115,6 +115,7 @@
                 <Button x:Name="btnSaveImage" Content="Lưu ảnh" Margin="5" Width="80"/>
                 <Button x:Name="btnBackup" Content="Sao lưu" Margin="5" Width="80" Click="btnBackup_Click"/>
                 <Button x:Name="btnRestore" Content="Phục hồi" Margin="5" Width="80" Click="btnRestore_Click"/>
+                <Button x:Name="btnTraLuong" Content="Trả lương" Margin="5" Width="80" Click="btnTraLuong_Click"/>
 
             </StackPanel>
         </GroupBox>

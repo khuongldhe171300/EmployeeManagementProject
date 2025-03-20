@@ -23,5 +23,10 @@ namespace WPF.Admin
         {
             InitializeComponent();
         }
+
+        private void SendNotification_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

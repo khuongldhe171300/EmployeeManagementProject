@@ -25,12 +25,15 @@
 
             <!-- Bảng thống kê nhân viên theo chức vụ -->
             <TextBlock Text="🛠️ Thống kê nhân viên theo Chức Vụ" FontSize="16" FontWeight="Bold" Foreground="#007acc" Margin="0,10,0,5"/>
-            <DataGrid x:Name="PositionReportGrid" Height="120" AutoGenerateColumns="False" Background="White" BorderBrush="#ddd" BorderThickness="1">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Chức Vụ" Binding="{Binding PositionName}" Width="*"/>
-                    <DataGridTextColumn Header="Số Nhân Viên" Binding="{Binding EmployeeCount}" Width="Auto"/>
-                </DataGrid.Columns>
-            </DataGrid>
+            <ListView x:Name="PositionReportList" Height="120" Background="White" BorderBrush="#ddd" BorderThickness="1">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Chức Vụ" Width="400" DisplayMemberBinding="{Binding PositionName}"/>
+                        <GridViewColumn Header="Số Nhân Viên" Width="Auto" DisplayMemberBinding="{Binding EmployeeCount}"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+
 
             <!-- Biểu đồ thống kê nhân viên theo giới tính -->
             <TextBlock Text="👥 Thống kê nhân viên theo Giới Tính" FontSize="16" FontWeight="Bold" Foreground="#007acc" Margin="0,10,0,5"/>

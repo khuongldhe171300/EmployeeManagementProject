@@ -43,7 +43,7 @@
                     </Grid.ColumnDefinitions>
 
                     <TextBlock Text="ID" Grid.Row="0" Margin="5"/>
-                    <TextBox x:Name="tbId" Grid.Row="0" Grid.Column="1" IsReadOnly="True" Margin="5"/>
+                    <TextBox x:Name="tbId"  Grid.Row="0" Grid.Column="1" IsEnabled="False" IsReadOnly="True" Margin="5"/>
 
                     <TextBlock Text="Họ và tên" Grid.Row="1" Margin="5"/>
                     <TextBox x:Name="tbName" Grid.Row="1" Grid.Column="1" Margin="5"/>
@@ -84,13 +84,13 @@
                     <TextBox x:Name="tbAddress" Grid.Row="1" Grid.Column="1" Margin="5"/>
 
                     <TextBlock Text="Phòng ban" Grid.Row="2" Margin="5"/>
-                    <TextBox x:Name="cbDepartment" IsReadOnly="True"  Grid.Row="2" Grid.Column="1" Margin="5"/>
+                    <TextBox x:Name="cbDepartment" IsEnabled="False"  Grid.Row="2" Grid.Column="1" Margin="5"/>
 
                     <TextBlock Text="Chức vụ" Grid.Row="3" Margin="5"/>
-                    <TextBox x:Name="cbPosition" IsReadOnly="True"  Grid.Row="3" Grid.Column="1" Margin="5"/>
+                    <TextBox x:Name="cbPosition" IsEnabled="False"  Grid.Row="3" Grid.Column="1" Margin="5"/>
 
                     <TextBlock Text="Mức lương" Grid.Row="4" Margin="5"/>
-                    <TextBox x:Name="tbSalary" IsReadOnly="True" Grid.Row="4" Grid.Column="1" Margin="5"/>
+                    <TextBox x:Name="tbSalary" IsReadOnly="True" IsEnabled="False" Grid.Row="4" Grid.Column="1" Margin="5"/>
 
                     <TextBlock Text="Ngày làm việc" Grid.Row="5" Margin="5"/>
                     <DatePicker x:Name="dpStartTime" IsEnabled="False" Grid.Row="5" Grid.Column="1" Margin="5"/>

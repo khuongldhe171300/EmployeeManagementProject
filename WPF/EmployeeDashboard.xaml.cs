@@ -34,7 +34,7 @@ namespace WPF
 
         private void ReportEmployee_Click(object sender, RoutedEventArgs e)
         {
-            CurrentView = new EmployeeManager();
+            CurrentView = new EmployeeManager(_employeeId);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
