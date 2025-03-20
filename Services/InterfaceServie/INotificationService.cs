@@ -10,5 +10,10 @@ namespace Services.InterfaceServie
     public interface INotificationService
     {
         Task Add(Notification entity);
+        Task<IEnumerable<Notification>> GetAll();
+        Task<IEnumerable<Notification>> GetById2(int empID);
+        Task<Notification> GetById(int empID);
+        Task Update(Notification entity);
+
     }
 }

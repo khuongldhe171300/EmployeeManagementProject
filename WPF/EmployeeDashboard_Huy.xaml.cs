@@ -62,5 +62,10 @@ namespace WPF
             new EmployeeProfile(employeeId).Show();
             this.Close();
         }
+
+        private void Notification_Click(object sender, RoutedEventArgs e)
+        {
+            new NotificationEmp(employeeId).Show();
+        }
     }
 }

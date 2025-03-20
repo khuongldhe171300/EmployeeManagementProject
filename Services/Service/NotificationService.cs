@@ -20,5 +20,21 @@ namespace Services.Service
         {
             return _notificationRepository.Add(entity);
         }
+        public async Task<IEnumerable<Notification>> GetAll()
+        {
+            return await _notificationRepository.GetAll();
+        }
+        public async Task<IEnumerable<Notification>> GetById2(int empID)
+        {
+            return await _notificationRepository.GetById2(empID);
+        }
+        public async Task<Notification> GetById(int empID)
+        {
+            return await _notificationRepository.GetById(empID);
+        }
+        public Task Update(Notification entity)
+        {
+            return _notificationRepository.Update(entity);
+        }
     }
 }

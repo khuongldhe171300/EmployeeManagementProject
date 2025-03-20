@@ -34,12 +34,15 @@ namespace Repositories.Repository
 
         public Task<Notification> GetById(int id)
         {
-            throw new NotImplementedException();
+            return (Task<Notification>)_notificationDAO.GetById(id);
         }
-
+        public Task<IEnumerable<Notification>> GetById2(int empID)
+        {
+            return _notificationDAO.GetById2(empID);
+        }
         public Task Update(Notification entity)
         {
-            throw new NotImplementedException();
+            return _notificationDAO.Update(entity);
         }
     }
 }
