@@ -35,21 +35,24 @@ namespace Repositories.Repository
             {
                 var user = _context.Users.FirstOrDefault(u => u.Username.Equals(userName));
 
-                if (!VerifyPassword(password, user.PasswordHash))
-                {
-                    throw new UnauthorizedAccessException("Mật khẩu không chính xác");
-                }
+               
 
                 if (user == null)
                 {
                     throw new KeyNotFoundException("Không tìm thấy thông tin người dùng");
                 }
-
-                if (!user.IsActive)
+                else
                 {
-                    throw new UnauthorizedAccessException("Tài khoản không có quyền truy cập");
-                }
+                    if (!VerifyPassword(password, user.PasswordHash))
+                    {
+                        throw new UnauthorizedAccessException("Mật khẩu không chính xác");
+                    }
 
+                    if (!user.IsActive)
+                    {
+                        throw new UnauthorizedAccessException("Tài khoản không có quyền truy cập");
+                    }
+                }
                 return user;
             }
            

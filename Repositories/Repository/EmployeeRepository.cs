@@ -75,5 +75,10 @@ namespace Repositories.Repository
         }
         public void UpdateEmployee(Employee employee) => employeeDAO.UpdateEmployee(employee);
         public User GetUserByEmpID(int empID) => employeeDAO.GetUserByEmpID(empID);
+
+        public void DeleteEmployee(int employeeId)
+        {
+            employeeDAO.DeleteEmployee(employeeId);
+        }
     }
 }

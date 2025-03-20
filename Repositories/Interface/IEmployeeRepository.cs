@@ -11,6 +11,7 @@ namespace Repositories.Interface
     public interface IEmployeeRepository : IRepository<Employee>
     {
         Employee GetEmployeeByID(int id);
+        void UpdateEmployeeById(Employee employee);
         void UpdateEmployee(Employee employee);
         User GetUserByEmpID(int empID);
 		List<DepartmentReport> GetEmployeeCountByDepartment();
@@ -19,6 +20,8 @@ namespace Repositories.Interface
         List<Employee> GetEmployees();
         void AddEmployee(Employee employee, string password);
         bool CheckEmailExisting(string email);
+
+        void DeleteEmployee(int employeeId);
 	}
 }
 

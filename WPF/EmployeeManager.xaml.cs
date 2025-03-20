@@ -2,8 +2,10 @@
 using Microsoft.Win32;
 using Repositories.Interface;
 using Repositories.Repository;
+using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using System;
@@ -167,13 +169,24 @@ namespace WPF
 
                 imgAvt.Source = new BitmapImage(new Uri(newFilePath, UriKind.Absolute));
             }
-            _employee.UpdateEmployee(employee);
+            _employee.UpdateEmployeeById(employee);
             LoadData();
             MessageBox.Show("Cập nhật nhân viên thành công");
         }
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
+            int employeeId;
+            if (int.TryParse(tbId.Text, out employeeId))
+            {
+                _employee.DeleteEmployee(employeeId);
+                LoadData();
+                MessageBox.Show("Xoá nhân viên thành công");
+            }
+            else
+            {
+                MessageBox.Show("Chưa chọn nhân viên để xoá!");
+            }
 
         }
 
