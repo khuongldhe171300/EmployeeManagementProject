@@ -25,7 +25,8 @@ namespace WPF.Admin
     {
         private readonly DepartmentService departmentService;
         private int departmentId =0;
-        public EmpDepList(Department seletedDepartment)
+        private int empID;
+        public EmpDepList(Department seletedDepartment, int empID)
         {
             InitializeComponent();
             var context = new HrmanagementContext();
@@ -33,6 +34,7 @@ namespace WPF.Admin
             var departmentRepository = new DepartmentRepository(departmentDao);
             departmentService = new DepartmentService(departmentRepository);
             departmentId = seletedDepartment.DepartmentId;
+            this.empID = empID;
             loadEmpDepList();
         }
         private void loadEmpDepList()
@@ -80,7 +82,7 @@ namespace WPF.Admin
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            DepManager depManager = new DepManager();
+            DepManager depManager = new DepManager(empID);
             depManager.Show();
             this.Close();
         }

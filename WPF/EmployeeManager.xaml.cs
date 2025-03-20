@@ -8,6 +8,14 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using DataAssetObjects;
+using Services.Service;
+
 
 namespace WPF
 {
@@ -19,17 +27,31 @@ namespace WPF
         private readonly IEmployeeRepository _employee;
         private readonly IDepartmentRepository _department;
         private readonly IPositionRepository _position;
+        private readonly ActivityLoggerService loggerService;
+        private readonly HrmanagementContext _context = new HrmanagementContext();
 
         public List<BusinessObjects.Models.Employee> Employees { get; set; }
         public List<Department> Departments { get; set; }
         public List<Position> Positions { get; set; }
+        int useID = 0;
 
         public EmployeeManager()
         {
             _employee = new EmployeeRepository();
             _department = new DepartmentReporsitory();
             _position = new PositionRepository();
+            loggerService = new ActivityLoggerService(new ActivityLoggerReposirory(new ActivityLoggerDAO(_context)));
             InitializeComponent();
+            
+            LoadData();
+        } public EmployeeManager(User id)
+        {
+            _employee = new EmployeeRepository();
+            _department = new DepartmentReporsitory();
+            _position = new PositionRepository();
+            loggerService = new ActivityLoggerService(new ActivityLoggerReposirory(new ActivityLoggerDAO(_context)));
+            InitializeComponent();
+            useID = id.UserId;
             LoadData();
         }
 
@@ -109,6 +131,8 @@ namespace WPF
                     }
 
                     _employee.AddEmployee(employee, password);
+                 
+                    loggerService.LogActivity(employee.EmployeeId, "Thêm", $"Thêm nhân viên {employee.FullName}");
                     LoadData();
                     MessageBox.Show("Thêm nhân viên thành công");
                 }
@@ -214,5 +238,77 @@ namespace WPF
         {
             return $"EMP{Guid.NewGuid().ToString("N").Substring(0, 6)}";
         }
+
+
+        private void btnBackup_Click(object sender, RoutedEventArgs e)
+        {
+            if (lvEmployees.Items.Count == 0)
+            {
+                MessageBox.Show("Danh sách nhân viên trống!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            SaveFileDialog saveFileDialog = new SaveFileDialog
+            {
+                Filter = "JSON files (*.json)|*.json",
+                Title = "Chọn nơi lưu tệp sao lưu"
+            };
+
+            if (saveFileDialog.ShowDialog() == true)
+            {
+                var employees = new List<BusinessObjects.Models.Employee>();
+                foreach (var item in lvEmployees.Items)
+                {
+                    employees.Add((BusinessObjects.Models.Employee)item);
+                }
+
+                string jsonData = JsonSerializer.Serialize(employees, new JsonSerializerOptions
+                {
+                    WriteIndented = true,
+                    ReferenceHandler = ReferenceHandler.Preserve,
+                                Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping // Giữ nguyên tiếng Việt
+
+                });
+                File.WriteAllText(saveFileDialog.FileName, jsonData);
+                MessageBox.Show("Sao lưu thành công!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+        }
+
+        private void btnRestore_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog
+            {
+                Filter = "JSON files (*.json)|*.json",
+                Title = "Chọn tệp sao lưu"
+            };
+
+            if (openFileDialog.ShowDialog() == true)
+            {
+                try
+                {
+                    string jsonData = File.ReadAllText(openFileDialog.FileName);
+                    var employees = JsonSerializer.Deserialize<List<BusinessObjects.Models.Employee>>(jsonData, new JsonSerializerOptions
+                    {
+                        ReferenceHandler = ReferenceHandler.Preserve
+                    });
+
+                    if (employees != null)
+                    {
+                        lvEmployees.ItemsSource = employees;
+                        MessageBox.Show("Phục hồi thành công!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Lỗi khi đọc dữ liệu!", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Lỗi: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+        }
+
+
     }
 }

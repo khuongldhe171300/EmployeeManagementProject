@@ -33,12 +33,16 @@ namespace WPF
 		private readonly IPayrollService payrollService;
 		private List<Payroll> _payrollData;
 
+		private int empID;
+
 		public List<string> SalaryChartLabels { get; set; }
 		public Func<double, string> YFormatter { get; set; }
 
 		public ChartValues<double> SalaryChartValues { get; set; } = new ChartValues<double>();
 
-		public BaoCaoLuongNhanVien()
+
+
+		public BaoCaoLuongNhanVien(int empID)
 		{
 			InitializeComponent();
 			var _context = new HrmanagementContext();
@@ -50,6 +54,7 @@ namespace WPF
 			YFormatter = value => value.ToString("N0") + " VND";
 
 			DataContext = this;
+			this.empID = empID;
 			LoadData();
 		}
 		private void LoadYears()
@@ -64,17 +69,20 @@ namespace WPF
 
 		private void LoadData()
 		{
-			//Nếu chỉ lấy lương của cá nhân id = 2
-			//_payrollData = payrollService.GetPayrollByEmp(2);
-
-			_payrollData = payrollService.GetAll();
-
+			if (empID == 1)
+			{
+				_payrollData = payrollService.GetAll();
+			}
+			else
+			{
+				_payrollData = payrollService.GetPayrollByEmp(empID);
+			}
 			FilterData();
 		}
 
 		private void FilterData()
 		{
-			
+
 			if (_payrollData == null || !_payrollData.Any())
 			{
 				if (PayrollDataGrid != null) // Kiểm tra PayrollDataGrid trước khi gán
@@ -200,10 +208,19 @@ namespace WPF
 
 		private void Back_Click(object sender, RoutedEventArgs e)
 		{
-			EmployeeDashboard employeeDashboard = new EmployeeDashboard();
-			employeeDashboard.Show();
-			this.Close(); // Đóng cửa sổ hiện tại, quay về màn hình trước
-		}
+            if (empID == 1)
+            {
+                EmployeeDashboard employeeDashboard = new EmployeeDashboard(empID);
+                employeeDashboard.Show();
+                this.Close(); // Đóng cửa sổ hiện tại, quay về màn hình trước
+            }
+            else
+            {
+                EmployeeDashboard_Huy employeeDashboard = new EmployeeDashboard_Huy(empID);
+                employeeDashboard.Show();
+                this.Close(); // Đóng cửa sổ hiện tại, quay về màn hình trước
+            }
+        }
 	}
 }
 

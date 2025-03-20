@@ -17,6 +17,7 @@ using Services.Service;
 using BusinessObjects.Models;
 using WPF.Employee;
 using static System.Net.Mime.MediaTypeNames;
+using Org.BouncyCastle.Ocsp;
 
 namespace WPF.Admin
 {
@@ -28,7 +29,7 @@ namespace WPF.Admin
         private PayrollService payrollService;
         private readonly EmployeeService employeeService;
         int EmpID = 0;
-        public PayrollManager(BusinessObjects.Models.Employee emp)
+        public PayrollManager(int EmployeeId)
         {
             InitializeComponent();
             HrmanagementContext context = new HrmanagementContext();
@@ -38,7 +39,7 @@ namespace WPF.Admin
             employeeService = new EmployeeService(new EmployeeRepository(new EmployeeDAO(context)));
             cbMonth.SelectedIndex = DateTime.Now.Month - 1;
             txtYear.Text = DateTime.Now.Year.ToString();
-            EmpID = emp.EmployeeId;
+            EmpID = EmployeeId;
             LoadDefaultData();
         }
         private void LoadDefaultData()
@@ -117,10 +118,9 @@ namespace WPF.Admin
 
         private void btnBack_Click(object sender, RoutedEventArgs e)
         {
-            var user = employeeService.GetUserByEmpID(EmpID);
-            EmployeeProfile employeeProfile = new EmployeeProfile(user);
-            employeeProfile.Show();
-            this.Close();
+            EmployeeDashboard employeeDashboard = new EmployeeDashboard(EmpID);
+            employeeDashboard.Show();
+            this.Close(); // Đóng cửa sổ hiện tại, quay về màn hình trước
         }
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)

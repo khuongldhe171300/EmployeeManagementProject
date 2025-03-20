@@ -9,11 +9,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using DataAssetObjects;
+using Microsoft.Extensions.Logging;
 namespace DataAssetObjects
 {
     public class EmployeeDAO
     {
         private readonly HrmanagementContext _context;
+
 
         public EmployeeDAO()
         {
@@ -108,8 +110,16 @@ namespace DataAssetObjects
             {
                 try
                 {
+                    // Kiểm tra username trước khi thêm nhân viên
+                    if (_context.Users.Any(u => u.Username == employee.FullName))
+                    {
+                        throw new InvalidOperationException("Username đã tồn tại.");
+                    }
+
+                    // Thêm nhân viên
                     _context.Employees.Add(employee);
 
+                    // Thêm tài khoản người dùng liên kết với nhân viên
                     var user = new User
                     {
                         Username = employee.FullName,
@@ -121,13 +131,23 @@ namespace DataAssetObjects
                     };
                     _context.Users.Add(user);
 
+                   
+
+                    // Lưu thay đổi
                     _context.SaveChanges();
                     transaction.Commit();
+                    // Ghi log trước khi commit giao dịch
+                    
                 }
-                catch (Exception)
+                catch (InvalidOperationException ex)
                 {
                     transaction.Rollback();
-                    throw;
+                    throw new Exception($"Lỗi dữ liệu: {ex.Message}", ex);
+                }
+                catch (Exception ex)
+                {
+                    transaction.Rollback();
+                    throw new Exception("Có lỗi xảy ra khi thêm nhân viên.", ex);
                 }
             }
         }

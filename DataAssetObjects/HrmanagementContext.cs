@@ -2,15 +2,18 @@
 using System.Collections.Generic;
 using BusinessObjects.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Configuration;
 
 namespace DataAssetObjects;
 
 public partial class HrmanagementContext : DbContext
-{
+{ 
+    
     public HrmanagementContext()
     {
     }
+
 
     public HrmanagementContext(DbContextOptions<HrmanagementContext> options)
         : base(options)
@@ -37,6 +40,7 @@ public partial class HrmanagementContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
+       
         var builder = new ConfigurationBuilder()
                                .SetBasePath(Directory.GetCurrentDirectory())
                                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);

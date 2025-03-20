@@ -42,13 +42,13 @@ namespace WPF
                     switch (user.UserRole)
                     {
                         case "Admin":
-                            new EmployeeDashboard().Show();
+                            new EmployeeDashboard(user.EmployeeId).Show();
                             this.Close();
                             break;
                         case "User":
                             break;
                         case "Employee":
-                            new EmployeeProfile(user).Show();
+                            new EmployeeDashboard_Huy(user.EmployeeId).Show();
                             this.Close();
                             break;
                         default:

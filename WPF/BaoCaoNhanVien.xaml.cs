@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Windows;
+using Org.BouncyCastle.Ocsp;
 
 namespace WPF
 {
@@ -18,13 +19,15 @@ namespace WPF
 	{
 		private readonly IEmployeeService employeeService;
 
-		public ChartValues<int> DepartmentReportValues { get; set; }
+		private int empID;
+
+        public ChartValues<int> DepartmentReportValues { get; set; }
 		public List<string> DepartmentLabels { get; set; }
 
 		public ChartValues<int> MaleCount { get; set; }
 		public ChartValues<int> FemaleCount { get; set; }
 
-		public BaoCaoNhanVien()
+		public BaoCaoNhanVien(int empID)
 		{
 			InitializeComponent();
 			var _context = new HrmanagementContext();
@@ -40,6 +43,8 @@ namespace WPF
 			FemaleCount = new ChartValues<int>();
 
 			DataContext = this; // Gán DataContext cho Window
+
+			this.empID = empID;
 
 			LoadData();
 		}
@@ -77,9 +82,9 @@ namespace WPF
 
 		private void Back_Click(object sender, RoutedEventArgs e)
 		{
-			EmployeeDashboard employeeDashboard = new EmployeeDashboard();
-			employeeDashboard.Show();
-			this.Close(); // Đóng cửa sổ hiện tại, quay về màn hình trước
-		}
+            EmployeeDashboard employeeDashboard = new EmployeeDashboard(empID);
+            employeeDashboard.Show();
+            this.Close(); // Đóng cửa sổ hiện tại, quay về màn hình trước
+        }
 	}
 }
