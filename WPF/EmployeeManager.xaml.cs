@@ -145,7 +145,7 @@ namespace WPF
 
                 imgAvt.Source = new BitmapImage(new Uri(newFilePath, UriKind.Absolute));
             }
-            _employee.UpdateEmployee(employee);
+            _employee.UpdateEmployeeById(employee);
             LoadData();
             MessageBox.Show("Cập nhật nhân viên thành công");
         }

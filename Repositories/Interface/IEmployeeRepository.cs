@@ -11,6 +11,7 @@ namespace Repositories.Interface
     public interface IEmployeeRepository : IRepository<Employee>
     {
         Employee GetEmployeeByID(int id);
+        void UpdateEmployeeById(Employee employee);
         void UpdateEmployee(Employee employee);
         User GetUserByEmpID(int empID);
 		List<DepartmentReport> GetEmployeeCountByDepartment();

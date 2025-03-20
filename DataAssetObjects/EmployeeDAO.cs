@@ -24,10 +24,12 @@ namespace DataAssetObjects
         {
             _context = context;
         }
+
         public Employee GetEmployeeByID(int id)
         {
             return _context.Employees.Include(e => e.Position).Include(e => e.Department).FirstOrDefault(e => e.EmployeeId == id);
         }
+
         public void UpdateEmployee(Employee employee)
         {
             _context.Employees.Update(employee);
