@@ -42,9 +42,10 @@ namespace WPF
             _position = new PositionRepository();
             loggerService = new ActivityLoggerService(new ActivityLoggerReposirory(new ActivityLoggerDAO(_context)));
             InitializeComponent();
-            
+
             LoadData();
-        } public EmployeeManager(User id)
+        }
+        public EmployeeManager(User id)
         {
             _employee = new EmployeeRepository();
             _department = new DepartmentReporsitory();
@@ -131,8 +132,10 @@ namespace WPF
                     }
 
                     _employee.AddEmployee(employee, password);
-                 
-                    loggerService.LogActivity(employee.EmployeeId, "Thêm", $"Thêm nhân viên {employee.FullName}");
+
+                    User user_Id = loggerService.GetById(employee.EmployeeId);
+
+                    loggerService.LogActivity(user_Id.UserId, "Thêm", $"Thêm nhân viên {employee.FullName}");
                     LoadData();
                     MessageBox.Show("Thêm nhân viên thành công");
                 }
@@ -147,31 +150,52 @@ namespace WPF
 
         private void btnUpdate_Click(object sender, RoutedEventArgs e)
         {
-            BusinessObjects.Models.Employee employee = GetEmployee();
-            employee.EmployeeId = int.Parse(tbId.Text);
-            string filePath = (imgAvt.Source as BitmapImage)?.UriSource?.LocalPath;
-
-            if (!string.IsNullOrEmpty(filePath) && System.IO.File.Exists(filePath))
+            int employeeId;
+            if (int.TryParse(tbId.Text, out employeeId))
             {
-                string savePath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resource", "avatar");
-
-                if (!System.IO.Directory.Exists(savePath))
+                BusinessObjects.Models.Employee employee = GetEmployee();
+                try
                 {
-                    System.IO.Directory.CreateDirectory(savePath);
+                    employee.EmployeeId = int.Parse(tbId.Text);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Chưa chọn nhân viên để cập nhập!");
                 }
 
-                string newFileName = Guid.NewGuid().ToString() + System.IO.Path.GetExtension(filePath);
-                string newFilePath = System.IO.Path.Combine(savePath, newFileName);
+                string filePath = (imgAvt.Source as BitmapImage)?.UriSource?.LocalPath;
 
-                System.IO.File.Copy(filePath, newFilePath, true);
+                if (!string.IsNullOrEmpty(filePath) && System.IO.File.Exists(filePath))
+                {
+                    string savePath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resource", "avatar");
 
-                employee.Avatar = System.IO.Path.Combine("Resource", "avatar", newFileName);
+                    if (!System.IO.Directory.Exists(savePath))
+                    {
+                        System.IO.Directory.CreateDirectory(savePath);
+                    }
 
-                imgAvt.Source = new BitmapImage(new Uri(newFilePath, UriKind.Absolute));
+                    string newFileName = Guid.NewGuid().ToString() + System.IO.Path.GetExtension(filePath);
+                    string newFilePath = System.IO.Path.Combine(savePath, newFileName);
+
+                    System.IO.File.Copy(filePath, newFilePath, true);
+
+                    employee.Avatar = System.IO.Path.Combine("Resource", "avatar", newFileName);
+
+                    imgAvt.Source = new BitmapImage(new Uri(newFilePath, UriKind.Absolute));
+                }
+                _employee.UpdateEmployeeById(employee);
+
+                User user_Id = loggerService.GetById(employee.EmployeeId);
+                if (user_Id != null) { 
+                    loggerService.LogActivity(user_Id.UserId, "Cập nhật", $"Cập nhật nhân viên {employee.FullName}");
+                }
+                LoadData();
+                MessageBox.Show("Cập nhật nhân viên thành công");
             }
-            _employee.UpdateEmployeeById(employee);
-            LoadData();
-            MessageBox.Show("Cập nhật nhân viên thành công");
+            else
+            {
+                MessageBox.Show("Chưa chọn nhân viên để cập nhập!");
+            }
         }
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
@@ -181,6 +205,11 @@ namespace WPF
             {
                 _employee.DeleteEmployee(employeeId);
                 LoadData();
+                User user_Id = loggerService.GetById(employeeId);
+                if (user_Id != null)
+                {
+                    loggerService.LogActivity(user_Id.UserId, "Xoá ", $"Xoá nhân viên {user_Id.Username}");
+                }
                 MessageBox.Show("Xoá nhân viên thành công");
             }
             else
@@ -266,7 +295,7 @@ namespace WPF
                 {
                     WriteIndented = true,
                     ReferenceHandler = ReferenceHandler.Preserve,
-                                Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping // Giữ nguyên tiếng Việt
+                    Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping // Giữ nguyên tiếng Việt
 
                 });
                 File.WriteAllText(saveFileDialog.FileName, jsonData);

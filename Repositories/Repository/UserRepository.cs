@@ -1,5 +1,6 @@
 ﻿using BusinessObjects.Models;
 using DataAssetObjects;
+using Microsoft.EntityFrameworkCore;
 using Repositories.Interface;
 
 namespace Repositories.Repository
@@ -7,6 +8,15 @@ namespace Repositories.Repository
     public class UserRepository : IUserRepository
     {
         private readonly HrmanagementContext _context;
+
+        public UserRepository()
+        {
+            _context = new HrmanagementContext();
+        }
+        public UserRepository(HrmanagementContext context)
+        {
+            _context = context;
+        }
        
         public Task Add(User entity)
         {
@@ -23,10 +33,11 @@ namespace Repositories.Repository
             throw new NotImplementedException();
         }
 
-        public Task<User> GetById(int id)
+        public async Task<User?> GetById(int id)
         {
-            throw new NotImplementedException();
+            return await _context.Users.FirstOrDefaultAsync(u => u.EmployeeId == id);
         }
+
 
         //Thaodp
         public User GetUserByUserNameAndPassword(string userName, string password)

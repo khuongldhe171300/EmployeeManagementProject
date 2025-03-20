@@ -1,4 +1,5 @@
-﻿using Repositories.Repository;
+﻿using BusinessObjects.Models;
+using Repositories.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +19,16 @@ namespace Services.Service
         public void LogActivity(int userId, string action, string actionDetails, string? ipAddress = null)
         {
             _activityLoggerReposirory.LogActivity(userId, action, actionDetails, ipAddress);
+        }
+
+        public async Task<ActivityLog> GetActivityLogById(int id)
+        {
+            return await _activityLoggerReposirory.GetActivityLogById(id);
+        }
+
+        public  User GetById(int id)
+        {
+            return  _activityLoggerReposirory.GetById(id);
         }
     }
 }

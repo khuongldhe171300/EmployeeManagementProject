@@ -1,5 +1,6 @@
 ﻿using BusinessObjects.Models;
 using DataAssetObjects;
+using DocumentFormat.OpenXml.Wordprocessing;
 using Repositories.Repository;
 using Services.InterfaceServie;
 using Services.Service;
@@ -26,6 +27,8 @@ namespace WPF.Admin
         private readonly LeaveRequestService _leaveRequestService;
         private readonly NotificationService _notificationService;
         private int empID;
+        private readonly ActivityLoggerService _activityLoggerService;
+
 
         public ManagerOnLeave(int empID)
         {
@@ -34,8 +37,11 @@ namespace WPF.Admin
             var notificationDAO = new NotificationDAO(_context);
             var leaveRequestRepository = new LeaveRequestRepository(leaveDAO);
             var notificationRepository = new NotificationRepository(notificationDAO);
+            var activityLogDao = new ActivityLoggerDAO(_context);
+            var activityLoggerReposirory = new ActivityLoggerReposirory(activityLogDao);
             _leaveRequestService = new LeaveRequestService(leaveRequestRepository);
             _notificationService = new NotificationService(notificationRepository);
+            _activityLoggerService = new ActivityLoggerService(activityLoggerReposirory);
             InitializeComponent();
 
             LoadData();
@@ -134,6 +140,7 @@ namespace WPF.Admin
 
             _notificationService.Add(notification);
 
+          
 
             MessageBox.Show("Yêu cầu nghỉ phép đã bị từ chối!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
             LoadData();

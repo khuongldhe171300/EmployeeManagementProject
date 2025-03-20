@@ -17,6 +17,7 @@ namespace WPF.Admin
         private readonly LeaveRequestService _leaveRequestService;
         private readonly EmployeeService _employeeService;
         public event EventHandler LeaveRequestAdded;
+        private readonly ActivityLoggerService _activityLoggerService;
 
         public AddLeaveRequest()
         {
@@ -24,8 +25,10 @@ namespace WPF.Admin
             var LeaveRequestRepository = new LeaveRequestRepository(LeaveRequestDAO);
             var EmployeeDao = new EmployeeDAO(_context);
             var EmployeeRepository = new EmployeeRepository(EmployeeDao);
+            var ActivityDao = new ActivityLoggerDAO(_context);
             _employeeService = new EmployeeService(EmployeeRepository);
             _leaveRequestService = new LeaveRequestService(LeaveRequestRepository);
+            _activityLoggerService = new ActivityLoggerService(new ActivityLoggerReposirory(ActivityDao));
             InitializeComponent();
         }
 
@@ -99,6 +102,11 @@ namespace WPF.Admin
             };
 
             await _leaveRequestService.Add(leaveRequest);
+
+            User user = _activityLoggerService.GetById(leaveRequest.EmployeeId);
+            if (user != null) { 
+                _activityLoggerService.LogActivity(user.UserId, "Thêm yêu cầu nghỉ phép", "Thêm yêu cầu nghỉ phép từ " + startDate.ToString("dd/MM/yyyy") + " đến " + endDate.ToString("dd/MM/yyyy"));
+            }
 
             MessageBox.Show("Lưu thành công!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
 

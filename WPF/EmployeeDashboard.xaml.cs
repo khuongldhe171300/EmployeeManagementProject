@@ -91,5 +91,10 @@ namespace WPF
             a.Show();
             this.Close();
         }
+
+        private void Thongbao_btn_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
     }
 }

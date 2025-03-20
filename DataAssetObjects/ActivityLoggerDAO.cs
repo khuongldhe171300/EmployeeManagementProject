@@ -17,20 +17,46 @@ namespace DataAssetObjects
             _context = context;
         }
 
-        public void LogActivity(int userId, string action, string actionDetails, string? ipAddress = null)
+        public async Task LogActivity(int userId, string action, string actionDetails, string? ipAddress = null)
         {
-            var log = new ActivityLog
-            {
-                UserId = userId,
-                Action = action,
-                ActionDetails = actionDetails,
-                Ipaddress = ipAddress ?? "Unknown",
-                LoggedAt = DateTime.UtcNow
-            };
+            var existingLog = await _context.ActivityLogs.FirstOrDefaultAsync(x => x.UserId == userId);
 
-            _context.ActivityLogs.Add(log);
-            _context.SaveChanges();
+            if (existingLog != null)
+            {
+
+                existingLog.Action += $" - {action}";
+                existingLog.ActionDetails += $" - {actionDetails}";
+                existingLog.LoggedAt = DateTime.UtcNow;
+            }
+            else
+            {
+                // Nếu chưa có log, tạo mới
+                var newLog = new ActivityLog
+                {
+                    UserId = userId,
+                    Action = action,
+                    ActionDetails = actionDetails,
+                    Ipaddress = ipAddress ?? "Unknown",
+                    LoggedAt = DateTime.UtcNow
+                };
+
+                _context.ActivityLogs.Add(newLog);
+            }
+
+            await _context.SaveChangesAsync(); 
         }
+
+
+        public async Task<ActivityLog> GetActivityLogById(int id)
+        {
+            return await _context.ActivityLogs.FirstOrDefaultAsync(x => x.UserId == id);
+        }
+
+        public User GetById(int id)
+        {
+            return _context.Users.FirstOrDefault(u => u.EmployeeId == id);
+        }
+
     }
 
 }

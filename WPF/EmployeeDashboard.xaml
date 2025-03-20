@@ -23,7 +23,7 @@
                 <Button x:Name="ThongKeNhanVien_btn" Content="Thống Kê Nhân Viên" Width="120" Margin="0 0 10 0" Click="ThongKeNhanVien_btn_Click"  />
                 <Button x:Name="ThongKeLuongNhanVien_btn" Content="Thống Kê Lương Nhân Viên" Width="170" Margin="0 0 10 0" Click="ThongKeLuongNhanVien_btn_Click"  />
                 <Button x:Name="TraLuong_btn" Content="Trả Lương Nhân Viên" Width="120" Margin="0 0 10 0" Click="TraLuong_btn_Click"  />
-
+                <Button x:Name="Thongbao_btn" Content="Tạo thông báo" Width="120" Margin="0 0 10 0" Click="Thongbao_btn_Click"  />
                 <Button Content="Đăng xuất" Width="120" Margin="0 0 10 0" Click="Button_Click"/>
             </StackPanel>
         </StackPanel>
