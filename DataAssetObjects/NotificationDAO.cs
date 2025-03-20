@@ -1,4 +1,5 @@
 ﻿using BusinessObjects.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +21,26 @@ namespace DataAssetObjects
             _context.Notifications.Add(notification);
             await _context.SaveChangesAsync();
         }
+        public async Task<IEnumerable<Notification>> GetAll()
+        {
+            return await _context.Notifications.ToListAsync();
+        }
 
+        public async Task<IEnumerable<Notification>> GetById2(int id)
+        {
+            return await _context.Notifications.Where(x => x.ReceiverId == id).ToListAsync();
+        }
+        public async Task GetById(int id)
+        {
+            await _context.Notifications.FindAsync(id);
+        }
+        public async Task Update(Notification notification)
+        {
+            using (var context = new HrmanagementContext())
+            {
+                context.Entry(notification).State = EntityState.Modified;
+                await context.SaveChangesAsync();
+            }
+                        }
     }
 }

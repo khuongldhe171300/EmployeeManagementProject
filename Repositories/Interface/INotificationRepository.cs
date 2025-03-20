@@ -9,6 +9,6 @@ namespace Repositories.Interface
 {
     public interface INotificationRepository : IRepository<Notification>
     {
-
+        Task<IEnumerable<Notification>> GetById2(int empID);
     }
 }
