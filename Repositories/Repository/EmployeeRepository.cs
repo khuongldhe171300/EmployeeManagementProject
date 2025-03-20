@@ -80,5 +80,11 @@ namespace Repositories.Repository
         {
             employeeDAO.DeleteEmployee(employeeId);
         }
+
+
+        public List<Employee> GetEmployee()
+        {
+            return employeeDAO.GetEmployee();
+        }
     }
 }

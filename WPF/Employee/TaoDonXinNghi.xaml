@@ -1,0 +1,38 @@
+﻿<Window x:Class="WPF.Employee.TaoDonXinNghi"
+                xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPF.Admin"
+        WindowStartupLocation="CenterScreen"
+        mc:Ignorable="d"
+         Title="Thêm mới đơn nghỉ phép" Height="350" Width="450"
+        Loaded="Window_Loaded">
+
+    <Grid>
+        <StackPanel Margin="20">
+            <TextBlock Text="Nhân viên:"/>
+            <TextBox x:Name="txtName" Height="25"/>
+
+
+            <TextBlock Text="Loại nghỉ:"/>
+            <ComboBox x:Name="cmbLeaveType">
+                <ComboBoxItem Content="Nghỉ phép"/>
+                <ComboBoxItem Content="Nghỉ ốm"/>
+                <ComboBoxItem Content="Nghỉ không lương"/>
+
+            </ComboBox>
+
+            <TextBlock Text="Bắt đầu:"/>
+            <DatePicker x:Name="dpStartDate"/>
+
+            <TextBlock Text="Kết thúc:"/>
+            <DatePicker x:Name="dpEndDate"/>
+
+            <TextBlock Text="Lý do:"/>
+            <TextBox x:Name="txtReason" Height="60"/>
+
+            <Button Content="Lưu" Click="SaveButton_Click" Background="Green" Foreground="White" Height="28"/>
+        </StackPanel>
+    </Grid>
+</Window>

@@ -30,5 +30,10 @@ namespace Services.Service
         {
             return await employeeRepository.GetAll();
         }
+
+        public List<Employee> GetEmployees()
+        {
+            return employeeRepository.GetEmployees();
+        }
     }
 }

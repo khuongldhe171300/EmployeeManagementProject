@@ -44,5 +44,15 @@ namespace Repositories.Repository
         {
             await _notificationDAO.Update(entity);
         }
+
+        public void SendNotificationToEmployee(int employeeId, string title, string content, string type)
+        {
+            _notificationDAO.SendNotificationToEmployee(employeeId, title, content, type);
+        }
+
+        public void SendNotificationToAllEmployee(string title, string content, string type)
+        {
+            _notificationDAO.SendNotificationToAllEmployees(title, content, type);
+        }   
     }
 }

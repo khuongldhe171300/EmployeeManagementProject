@@ -94,7 +94,8 @@ namespace WPF
 
         private void Thongbao_btn_Click(object sender, RoutedEventArgs e)
         {
-            
+            TaoThongBao a = new TaoThongBao(_employeeId);
+            a.Show();
         }
     }
 }

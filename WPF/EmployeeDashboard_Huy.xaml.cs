@@ -67,5 +67,12 @@ namespace WPF
         {
             new NotificationEmp(employeeId).Show();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+           
+            TaoDonXinNghi taoDonXinNghi = new TaoDonXinNghi(employeeId);
+            taoDonXinNghi.Show();
+        }
     }
 }

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:WPF"
                       mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-                Title="Employee Dashboard" Height="600" Width="1100" Background="#eef1f5">
+                Title="Employee Dashboard" Height="600" Width="1200" Background="#eef1f5">
 
     <Grid>
         <!-- Header with buttons -->
@@ -17,6 +17,7 @@
                 <Button Content="Báo Cáo Chấm Công" Margin="20,0,0,0"  Click="BaoCaoChamCong_Click" Width="130" Height="35"/>
                 <Button Content="Báo Cáo Lương Thưởng"  Margin="20,0,0,0" Click="BaoCaoLuong_Click" Width="130" Height="35"/>
                 <Button Content="Profile" Margin="20,0,0,0" Click="Profile_Click" Width="79" Height="35"/>
+                <Button Content="Tạo đơn xin nghỉ" Margin="20,0,0,0" Width="100" Height="36" Click="Button_Click"/>
                 <Button Content="Thông Báo" Margin="20,0,0,0" Width="79" Height="35"/>
                 <Button Content="🔑 Đăng Xuất" Margin="20,0,0,0" Click="Logout_Click" Width="110" Height="35"/>
             </StackPanel>

@@ -195,6 +195,12 @@ namespace DataAssetObjects
         {
             return BCrypt.Net.BCrypt.HashPassword(password);
         }
+
+
+        public List<Employee> GetEmployee()
+        {
+            return _context.Employees.ToList();
+        }
     }
 
     public class DepartmentReport

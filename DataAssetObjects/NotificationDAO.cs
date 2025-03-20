@@ -41,6 +41,40 @@ namespace DataAssetObjects
                 context.Entry(notification).State = EntityState.Modified;
                 await context.SaveChangesAsync();
             }
-                        }
+        }
+
+        public void SendNotificationToEmployee(int employeeId, string title, string content, string type)
+        {
+            var notification = new Notification
+            {
+                ReceiverId = employeeId,
+                Title = title,
+                Content = content,
+                NotificationType = type,
+                CreatedDate = DateTime.Now,
+                IsRead = false
+            };
+
+            _context.Notifications.Add(notification);
+            _context.SaveChanges();
+        }
+
+        public void SendNotificationToAllEmployees(string title, string content, string type)
+        {
+            var allEmployeeIds = _context.Employees.Select(e => e.EmployeeId).ToList();
+
+            var notifications = allEmployeeIds.Select(empId => new Notification
+            {
+                ReceiverId = empId,
+                Title = title,
+                Content = content,
+                NotificationType = type,
+                CreatedDate = DateTime.Now,
+                IsRead = false
+            }).ToList();
+
+            _context.Notifications.AddRange(notifications);
+            _context.SaveChanges();
+        }
     }
 }

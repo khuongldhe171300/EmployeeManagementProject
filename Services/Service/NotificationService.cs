@@ -36,5 +36,15 @@ namespace Services.Service
         {
             return _notificationRepository.Update(entity);
         }
+
+        public void SendNotificationToEmployee(int employeeId, string title, string content, string type)
+        {
+            _notificationRepository.SendNotificationToEmployee(employeeId, title, content, type);
+        }
+
+            public void SendNotificationToAllEmployee(string title, string content, string type)
+        {
+            _notificationRepository.SendNotificationToAllEmployee(title, content, type);
+        }
     }
 }

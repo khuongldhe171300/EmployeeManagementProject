@@ -5,9 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPF.Admin"
         mc:Ignorable="d"
-        Title="Tạo Thông Báo" Height="450" Width="600"
-        Background="#FFA500">
-
+        Title="Tạo Thông Báo" Height="500" Width="600" Background="#FFFAE3">
     <Grid Margin="20">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -19,30 +17,30 @@
         </Grid.RowDefinitions>
 
         <!-- Tiêu đề -->
-        <TextBlock Text="Tạo Thông Báo" FontSize="22" FontWeight="Bold" Foreground="White" HorizontalAlignment="Center" Margin="0,0,0,20"/>
+        <TextBlock Text="📢 Tạo Thông Báo" FontSize="22" FontWeight="Bold" Foreground="DarkOrange"/>
 
         <!-- Người nhận -->
         <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,10,0,0">
-            <TextBlock Text="Người nhận:" FontWeight="Bold" Width="120" VerticalAlignment="Center" Foreground="White"/>
-            <ComboBox x:Name="cbReceiver" Width="319" Background="White" BorderBrush="Gray" Padding="5"/>
+            <TextBlock Text="👤 Người nhận:" FontWeight="Bold" Width="120" VerticalAlignment="Center"/>
+            <ComboBox x:Name="cbReceiver" Width="320"/>
         </StackPanel>
 
         <!-- Tiêu đề thông báo -->
         <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0,10,0,0">
-            <TextBlock Text="Tiêu đề:" FontWeight="Bold" Width="120" VerticalAlignment="Center" Foreground="White"/>
-            <TextBox x:Name="txtTitle" Width="320" Background="White" BorderBrush="Gray" Padding="5"/>
+            <TextBlock Text="📝 Tiêu đề:" FontWeight="Bold" Width="120" VerticalAlignment="Center"/>
+            <TextBox x:Name="txtTitle" Width="320"/>
         </StackPanel>
 
         <!-- Nội dung thông báo -->
         <StackPanel Grid.Row="3" Margin="0,10,0,0">
-            <TextBlock Text="Nội dung:" FontWeight="Bold" Foreground="White"/>
-            <TextBox x:Name="txtContent" Width="325" Height="100" TextWrapping="Wrap" AcceptsReturn="True" Background="White" BorderBrush="Gray" Padding="5"/>
+            <TextBlock Text="📃 Nội dung:" FontWeight="Bold"/>
+            <TextBox x:Name="txtContent" Width="460" Height="100" TextWrapping="Wrap" AcceptsReturn="True"/>
         </StackPanel>
 
         <!-- Loại thông báo -->
         <StackPanel Grid.Row="4" Orientation="Horizontal" Margin="0,10,0,0">
-            <TextBlock Text="Loại thông báo:" FontWeight="Bold" Width="120" VerticalAlignment="Center" Foreground="White"/>
-            <ComboBox x:Name="cbNotificationType" Width="324" Background="White" BorderBrush="Gray" Padding="5">
+            <TextBlock Text="🔔 Loại thông báo:" FontWeight="Bold" Width="120" VerticalAlignment="Center"/>
+            <ComboBox x:Name="cbNotificationType" Width="320">
                 <ComboBoxItem Content="Thông báo chung"/>
                 <ComboBoxItem Content="Thông báo khẩn"/>
                 <ComboBoxItem Content="Thông báo cá nhân"/>
@@ -50,9 +48,8 @@
         </StackPanel>
 
         <!-- Nút gửi -->
-        <Button Grid.Row="5" Content="📩 Gửi Thông Báo" Background="#007ACC" Foreground="White" 
+        <Button Grid.Row="5" Content="🚀 Gửi Thông Báo" Background="#FF5733" Foreground="White" 
                 FontSize="16" Padding="10" BorderThickness="0" Cursor="Hand" Margin="0,20,0,0"
-                HorizontalAlignment="Center" Width="200" Height="40" 
                 Click="SendNotification_Click"/>
     </Grid>
 </Window>
