@@ -136,6 +136,14 @@ namespace WPF.Admin
                 department.DepartmentName = NameTextBox.Text;
                 department.Description = DescriptionTextBox.Text;
                 department.Status = StatusBox.Text.Trim() == "Hoạt Động" ? true : false;
+                if(department.Status == false)
+                {
+                    var empList = departmentService.GetEmpByDep(DepID);
+                    foreach (var emp in empList)
+                    {
+                        departmentService.DeleteEmpDep(emp.EmployeeId);
+                    }
+                }
                 departmentService.UpdateDepartment(department);
                 MessageBox.Show("Cập nhật thành công!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
                 loadDepartments();
@@ -160,6 +168,11 @@ namespace WPF.Admin
                     try
                     {
                         departmentService.DeleteDepartment(seletedDepartment.DepartmentId);
+                        var emplist = departmentService.GetEmpByDep(seletedDepartment.DepartmentId);
+                        foreach(var emp in emplist)
+                        {
+                            departmentService.DeleteEmpDep(emp.EmployeeId);
+                        }
                         MessageBox.Show("Xóa thành công!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
                         loadDepartments();
                         resetFields();
@@ -258,11 +271,23 @@ namespace WPF.Admin
                 {
                     try
                     {
+                        if (seletedDepartment.Status == false)
+                        {
+                            MessageBox.Show("Phòng ban đã bị vô hiệu hóa!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
+                            return;
+                        }
+                        else if (departmentService.GetEmpByDep(seletedDepartment.DepartmentId).Any(x => x.EmployeeId == empID))
+                        {
+                            MessageBox.Show("Nhân viên đã tồn tại trong phòng ban!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
+                            return;
+                        }
+                        else { 
                         departmentService.UpdateEmpDep(seletedDepartment.DepartmentId, empID);
                         MessageBox.Show("Thêm nhân viên thành công!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
                         EmpNameTextBox.Clear();
                         EmpNameTextBox.Tag = null;
                         resetFields();
+                    }
                     }
                     catch (Exception ex)
                     {
