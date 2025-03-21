@@ -97,5 +97,11 @@ namespace WPF
             TaoThongBao a = new TaoThongBao(_employeeId);
             a.Show();
         }
+
+        private void ActivityLog_btn_Click(object sender, RoutedEventArgs e)
+        {
+            ActivityLog a = new ActivityLog(_employeeId);
+            a.Show();
+        }
     }
 }

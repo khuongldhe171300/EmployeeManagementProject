@@ -57,6 +57,15 @@ namespace DataAssetObjects
             return _context.Users.FirstOrDefault(u => u.EmployeeId == id);
         }
 
+        public async Task<List<ActivityLog>> GetActivityLogs()
+        {
+            return await _context.ActivityLogs.ToListAsync();
+        }
+        public List<ActivityLog> GetAllActivityLogs()
+        {
+            return _context.ActivityLogs.Include(l => l.User).OrderByDescending(l => l.LoggedAt).ToList();
+        }
+
     }
 
 }

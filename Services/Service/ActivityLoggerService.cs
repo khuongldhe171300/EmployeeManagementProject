@@ -30,5 +30,15 @@ namespace Services.Service
         {
             return  _activityLoggerReposirory.GetById(id);
         }
+
+        public async Task<List<ActivityLog>> GetActivityLogs()
+        {
+            return await _activityLoggerReposirory.GetActivityLogs();
+        }
+
+        public List<ActivityLog> GetAllActivityLogs()
+        {
+            return _activityLoggerReposirory.GetAllActivityLogs();
+        }
     }
 }

@@ -31,5 +31,15 @@ namespace Repositories.Repository
         {
             return  _activityLogger.GetById(id);
         }
+
+        public async Task<List<ActivityLog>> GetActivityLogs()
+        {
+            return await _activityLogger.GetActivityLogs();
+        }
+
+        public List<ActivityLog> GetAllActivityLogs()
+        {
+            return _activityLogger.GetAllActivityLogs();
+        }
     }
 }
